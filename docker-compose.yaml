@@ -1,0 +1,5 @@
+services:
+  ui:
+    build: docker/ui
+  srv:
+    build: docker/srv
