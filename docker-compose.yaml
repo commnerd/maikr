@@ -1,5 +1,9 @@
 services:
   ui:
     build: docker/ui
+    volumes:
+      - "${PWD}/ui:/project/ui"
   srv:
     build: docker/srv
+    volumes:
+      - "${PWD}/srv:/project/srv"
