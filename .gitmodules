@@ -1,0 +1,3 @@
+[submodule "maikr-ui"]
+	path = ui
+	url = https://github.com/commnerd/maikr-ui.git

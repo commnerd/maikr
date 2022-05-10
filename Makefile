@@ -9,5 +9,8 @@ help:
 
 
 .PHONY: dev
-dev:
+dev: git-submodules
 	@docker-compose up -d
+
+.PHONY: git-submodules
+	@git submodules update --init
