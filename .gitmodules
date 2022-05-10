@@ -1,6 +1,6 @@
-[submodule "maikr-ui"]
+[submodule "ui"]
 	path = ui
 	url = https://github.com/commnerd/maikr-ui.git
-[submodule "maikr-srv"]
-	path = maikr-srv
+[submodule "srv"]
+	path = srv
 	url = https://github.com/commnerd/maikr-srv.git

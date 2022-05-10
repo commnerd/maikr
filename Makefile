@@ -14,4 +14,4 @@ dev: git-submodules
 
 .PHONY: git-submodules
 git-submodules:
-	@git submodules update --init
+	@git submodule update --init
