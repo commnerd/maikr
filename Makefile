@@ -1,17 +1,15 @@
+ENV = $(shell [ -f "env/make/Makefile.$*" ] && { echo "$*"; } || echo "dev";)
+ENV_TARGETS = $(filter-out $*, $(MAKECMDGOALS))
+
 .PHONY: help
 help:
 	@echo "Usage:"
-	@echo "  make {subcommand}"
+	@echo "  make {env?} {subcommand}"
+	@echo "  note: If {env} is omitted, dev is defaulted."
 	@echo ""
-	@echo "subcommands:"
-	@echo "  help - this list of help commands"
-	@echo "  dev  - Spin up development environment"
+	@echo "env:"
+	@echo "  dev - Run dev environment subcommand"
+	@$(MAKE) -sf env/make/Makefile.$(ENV) help 2>/dev/null || $(MAKE)
 
-
-.PHONY: dev
-dev: git-submodules
-	@docker-compose up -d
-
-.PHONY: git-submodules
-git-submodules:
-	@git submodule update --init
+%:
+	$(MAKE) -f env/make/Makefile.$(ENV) $(ENV_TARGETS)
