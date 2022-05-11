@@ -2,6 +2,10 @@ CURRENT_DEV_CHAIN = "v0.1.x"
 
 .PHONY: help
 help:
+	@$(MAKE) -sf ../../Makefile help $(MAKECMDGOALS) 2>/dev/null 1>/dev/null || $(MAKE)
+
+.PHONY: env-help
+env-help:
 	@echo ""
 	@echo "subcommands:"
 	@echo "  help           - this list of help commands"
