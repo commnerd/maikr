@@ -1,0 +1,28 @@
+.PHONY: help
+help:
+	@echo ""
+	@echo "subcommands:"
+	@echo "  help           - this list of help commands"
+	@echo "  down           - Spin down development environment"
+	@echo "  restart        - Restart dev environment"
+	@echo "  up             - Spin up development environment"
+	@echo "  git-submodules - Install git submodules (dependency)"
+
+.PHONY: dev
+dev: git-submodules
+	@docker-compose up -d --build
+
+.PHONY: dev-down
+dev: git-submodules
+	@docker-compose down
+
+.PHONY: dev-restart
+dev-restart: dev-down dev-up
+
+.PHONY: dev-up
+dev: git-submodules
+	@docker-compose up -d --build
+
+.PHONY: git-submodules
+git-submodules:
+	@git submodule update --init

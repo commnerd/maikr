@@ -8,6 +8,6 @@ EXPOSE ${PORT}
 
 VOLUME  /srv/srv
 VOLUME /srv/lib
-WORKDIR /srv
+WORKDIR /srv/srv
 
 ENTRYPOINT [ "bash", "-c", "npm install && npm run serve" ]
