@@ -2,9 +2,8 @@ FROM node
 
 ENV USER  1000
 ENV GROUP 1000
-ENV PORT  4200
 
-EXPOSE ${PORT}
+EXPOSE 4200
 
 RUN bash -c 'npm install -g npm@8.9.0 @angular/cli'
 
