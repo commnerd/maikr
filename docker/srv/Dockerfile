@@ -6,7 +6,8 @@ ENV PORT  3000
 
 EXPOSE ${PORT}
 
-VOLUME  /srv
+VOLUME  /srv/srv
+VOLUME /srv/lib
 WORKDIR /srv
 
 ENTRYPOINT [ "bash", "-c", "npm install && npm run serve" ]
