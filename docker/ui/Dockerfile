@@ -1,10 +1,9 @@
 FROM node
 
-RUN npm install -g npm@8.9.0 @angular/cli && mkdir -p /project/ui
+RUN bash -c 'npm install -g npm@8.9.0 @angular/cli'
 
-VOLUME  /project/ui
-WORKDIR /project/ui
+VOLUME  /srv
+WORKDIR /srv
 
-
-# ENTRYPOINT [ "npm install && ng serve" ]
-ENTRYPOINT [ "bash" ]
+# ENTRYPOINT [ "/usr/local/bin/npm install && /usr/local/bin/ng serve" ]
+ENTRYPOINT [ "bash", "-c", "npm install && ng serve" ]

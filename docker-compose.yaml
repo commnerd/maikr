@@ -2,11 +2,11 @@ services:
   ui:
     build: docker/ui
     volumes:
-      - "${PWD}/ui:/project/ui"
+      - ./ui:/srv:z
   srv:
     build: docker/srv
     volumes:
-      - "${PWD}/srv:/project/srv"
+      - ./srv:/srv:z
   mongodb:
     image: mongo:5.0.8
     ports:
