@@ -1,3 +1,5 @@
+CURRENT_DEV_CHAIN = "v0.1.x"
+
 .PHONY: help
 help:
 	@echo ""
@@ -8,21 +10,18 @@ help:
 	@echo "  up             - Spin up development environment"
 	@echo "  git-submodules - Install git submodules (dependency)"
 
-.PHONY: dev
-dev: git-submodules
-	@docker-compose up -d --build
-
-.PHONY: dev-down
-dev: git-submodules
+.PHONY: down
+down:
 	@docker-compose down
 
-.PHONY: dev-restart
-dev-restart: dev-down dev-up
+.PHONY: restart
+restart: down up
 
-.PHONY: dev-up
-dev: git-submodules
+.PHONY: up
+up: git-submodules
 	@docker-compose up -d --build
 
 .PHONY: git-submodules
 git-submodules:
 	@git submodule update --init
+	@git submodule foreach --recursive git checkout $(CURRENT_DEV_CHAIN) && git pull
