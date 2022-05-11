@@ -3,10 +3,20 @@ services:
     build: docker/ui
     volumes:
       - ./ui:/srv:z
+    ports:
+      - ${UI_PORT:-4200}:4200
+    environment:
+      - UID=${UID}
+      - GID=${GID:-${UID}}
   srv:
     build: docker/srv
     volumes:
       - ./srv:/srv:z
+    ports:
+      - ${SRV_PORT:-3000}:3000
+    environment:
+      - USER=${UID}
+      - GID=${GID:-${UID}}
   mongodb:
     image: mongo:5.0.8
     ports:
