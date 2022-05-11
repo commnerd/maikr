@@ -8,7 +8,8 @@ EXPOSE ${PORT}
 
 RUN bash -c 'npm install -g npm@8.9.0 @angular/cli'
 
-VOLUME  /srv
-WORKDIR /srv
+VOLUME  /srv/ui
+VOLUME  /srv/lib
+WORKDIR /srv/ui
 
 ENTRYPOINT [ "bash", "-c", "npm install && ng serve --host 0.0.0.0" ]
