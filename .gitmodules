@@ -1,9 +1,0 @@
-[submodule "ui"]
-	path = ui
-	url = https://github.com/commnerd/maikr-ui.git
-[submodule "srv"]
-	path = srv
-	url = https://github.com/commnerd/maikr-srv.git
-[submodule "lib"]
-	path = lib
-	url = https://github.com/commnerd/maikr-lib.git
