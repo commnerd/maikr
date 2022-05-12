@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "rootDir": "./src/",
+    "esModuleInterop": true,
+    "paths": {
+      "@lib/*": ["node_modules/@maikr/lib/*"]
+    }
+  }
+}

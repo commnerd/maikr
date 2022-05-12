@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="center">
+    <form>
+      <div fxLayoutAlign="center">
+        <mat-form-field style="width:50%" appearance="fill">
+            <h1>Poject(s)</h1>
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="center" style="margin-top:10px">
+        <mat-form-field style="width:50%" appearance="fill">
+            <ul style="width:50%" appearance="fill" fxLayoutAlign="center" >
+                <li *ngFor="let project of projects">{{ project.name }}</li>
+            </ul>
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="center" style="margin-top:20px">
+        <button (click)="newProject()" mat-raised-button color="primary">New Project</button>
+      </div>
+    </form>
+  </div>
