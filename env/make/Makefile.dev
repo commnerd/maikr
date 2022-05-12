@@ -1,31 +1,30 @@
+.DEFAULT: serve
 CURRENT_DEV_CHAIN = "v0.1.x"
 
 .PHONY: help
 help:
-	@$(MAKE) -sf ../../Makefile help $(MAKECMDGOALS) 2>/dev/null 1>/dev/null || $(MAKE)
+	@$(MAKE) -sf ../../Makefile help $(MAKECMDGOALS) 2>/dev/null 1>/dev/null
 
 .PHONY: env-help
 env-help:
 	@echo ""
 	@echo "subcommands:"
-	@echo "  help           - this list of help commands"
-	@echo "  down           - Spin down development environment"
-	@echo "  restart        - Restart dev environment"
-	@echo "  up             - Spin up development environment"
-	@echo "  git-submodules - Install git submodules (dependency)"
+	@echo "  help    - This list of help commands"
+	@echo "  dev     - Alias for serve"
+	@echo "  down    - Spin down development environment"
+	@echo "  restart - Restart dev environment"
+	@echo "  serve   - Spin up development environment in Docker"
 
 .PHONY: down
 down:
-	@docker-compose down
+	@if [ $(shell docker-compose ps | wc -l ) -gt 2 ]; \
+	then \
+		docker-compose down; \
+	fi
 
 .PHONY: restart
-restart: down up
+restart: down serve
 
-.PHONY: up
-up: git-submodules
+.PHONY: serve
+serve:
 	@docker-compose up -d --build
-
-.PHONY: git-submodules
-git-submodules:
-	@git submodule update --init
-	@git submodule foreach --recursive git checkout $(CURRENT_DEV_CHAIN) && git pull

@@ -28,7 +28,8 @@
       ],
       "@pages/*": ["src/app/pages/*"],
       "@services/*": ["src/app/services/*"],
-      "@lib/*": ["node_modules/@maikr/lib/*"]
+      "@lib/*": ["node_modules/@maikr/lib/*"],
+      "@environments/*": ["src/environments/*"]
     }
   },
   "angularCompilerOptions": {
