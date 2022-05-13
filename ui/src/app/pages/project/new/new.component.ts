@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjectService } from '@services/project.service';
 import { Project } from '@models/project';
 import { Router } from '@angular/router';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-new',
@@ -28,11 +29,9 @@ export class NewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(project: Project){
-    let service = this.projectService.save(project).subscribe(() => {
-      service.unsubscribe();
-      this.router.navigate(['/']);
-    });
+  onSubmit(project: Project) {
+    this.projectService.save(project)
+      .then(() => this.router.navigate(["/"]));
   }
 
 }

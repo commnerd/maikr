@@ -5,10 +5,10 @@ ENV GROUP 1000
 
 EXPOSE 4200
 
-RUN bash -c 'npm install -g npm@8.9.0 @angular/cli'
+RUN bash -c 'npm install -g npm@8.10.0 @angular/cli'
 
 VOLUME  /srv/ui
 VOLUME  /srv/lib
 WORKDIR /srv/ui
 
-ENTRYPOINT [ "bash", "-c", "npm install && ng serve --host 0.0.0.0" ]
+ENTRYPOINT [ "bash", "-c", "npm install && ng serve --host 0.0.0.0 --disable-host-check" ]
