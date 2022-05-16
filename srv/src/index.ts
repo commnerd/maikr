@@ -1,6 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import mongodb from 'mongodb';
-
+import { Project } from './schema';
 const app = express();
 const port = 3000;
 
@@ -8,12 +7,15 @@ const index = (request: Request, response: Response, next: NextFunction) => {
     response.status(200).json();
 };
 
-const getProjectList = (request: Request, response: Response, next: NextFunction) => {
-  response.status(200).json([{"name": "Yippee", "description": "Hurray!"}]);
+const getProjectList = async (request: Request, response: Response, next: NextFunction) => {
+  let projects = await Project.find();
+  response.status(200).json(projects);
 }
 const storeProject = (request: Request, response: Response, next: NextFunction) => {
-  console.log(request.get('content-type'), request.body)
-  response.status(200).json(request.body);
+  let project = new Project(request.body);
+  project.save((err, prj) => {
+    response.status(200).json(request.body);
+  });
 };
 
 app.use(express.json());
