@@ -8,13 +8,13 @@ const index = (request: Request, response: Response, next: NextFunction) => {
 };
 
 const getProjectList = async (request: Request, response: Response, next: NextFunction) => {
-  let projects = await Project.find();
-  response.status(200).json(projects);
+  response.status(200).json(await Project.find({}));
 }
+
 const storeProject = (request: Request, response: Response, next: NextFunction) => {
   let project = new Project(request.body);
   project.save((err, prj) => {
-    response.status(200).json(request.body);
+    response.status(200).json(prj);
   });
 };
 

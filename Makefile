@@ -15,7 +15,7 @@ help:
 	@$(MAKE) -sf env/make/Makefile.$(ENV) env-help $(TARGETS) 2>/dev/null
 
 dev:
-	@$(MAKE) -sf env/make/Makefile.$(ENV) serve $(TARGETS) 2>/dev/null
+	@$(MAKE) -sf env/make/Makefile.$(ENV) serve $(TARGETS)
 
 %:
-	@$(MAKE) -sf env/make/Makefile.$(ENV) $(TARGETS) 2>/dev/null
+	@$(MAKE) -sf env/make/Makefile.$(ENV) $(TARGETS)

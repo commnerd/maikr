@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
-export const Project = mongoose.model('projects', new mongoose.Schema({
+mongoose.set('debug', true);
+mongoose.connect('mongodb://user:pass@mongodb/admin', {}, (err) => {
+  console.log(err);
+});
+
+export const Project = mongoose.model('Project', new mongoose.Schema({
   name: String,
   description: String,
 }));
