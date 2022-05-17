@@ -1,5 +1,5 @@
-ENVIRONMENTS = dev
-ENV = $(shell [ -f "env/$*/make/Makefile" ] && { echo "$*"; } || echo "dev";)
+ENVIRONMENTS = $(shell ls env)
+ENV = $(shell echo "$(filter $(ENVIRONMENTS), $(MAKECMDGOALS) dev)" | awk '{ print $$1; }')
 GOALS = $(filter-out $(ENVIRONMENTS) help, $(MAKECMDGOALS))
 
 .PHONY: help
@@ -12,10 +12,27 @@ help:
 	@for env in $(ENVIRONMENTS); do \
 		echo "  $${env} - Run $${env} environment subcommand"; \
 	done
-	@$(MAKE) -sf env/$(ENV)/make/Makefile env-help $(GOALS) 2>/dev/null
+	@$(MAKE) -sf env/$(ENV)/make/Makefile
 
 dev:
-	@$(MAKE) -sf env/$(ENV)/make/Makefile serve $(GOALS)
+	@if [ "$(GOALS)" ]; \
+	then \
+		$(MAKE) -sf env/$(ENV)/make/Makefile $(GOALS); \
+	else \
+		$(MAKE) -sf env/$(ENV)/make/Makefile serve; \
+	fi
+
+$(filter-out dev, $(ENVIRONMENTS)):
+	@if [ "$(GOALS)" ]; \
+	then \
+		$(MAKE) -sf env/$(ENV)/make/Makefile $(GOALS); \
+	else \
+		if [ "$(ENV)" == "$(MAKECMDGOALS)" ]; \
+		then \
+			$(MAKE) -s $(ENV) help; \
+		fi; \
+	fi
 
 %:
-	@$(MAKE) -sf env/$(ENV)/make/Makefile $(GOALS)
+	@echo "$(GOALS)"
+	@exit 0

@@ -1,8 +1,8 @@
 .DEFAULT: serve
 CURRENT_DEV_CHAIN = "v0.1.x"
 
-.PHONY: help
-help:
+.PHONY: env-help
+env-help:
 	@echo ""
 	@echo "subcommands:"
 	@echo "  help    - This list of help commands"
