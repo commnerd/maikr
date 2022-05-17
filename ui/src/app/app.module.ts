@@ -12,12 +12,16 @@ import { AppComponent } from './app.component';
 import { ProjectComponent } from '@pages/project/project.component';
 import { NewComponent } from './pages/project/new/new.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditComponent } from './pages/project/edit/edit.component';
+import { FormComponent } from './pages/project/form/form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectComponent,
-    NewComponent
+    NewComponent,
+    EditComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

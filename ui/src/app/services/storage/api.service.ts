@@ -24,10 +24,14 @@ export abstract class ApiService<T> {
   ) {}
 
   list(): Observable<Array<T>> {
-    return this.httpClient.get(this._endpoint) as Observable<Array<T>>;
+    return this.httpClient.get<Array<T>>(this._endpoint);
+  }
+
+  get(id: string): Observable<T> {
+    return this.httpClient.get<T>(`${this._endpoint}/${id}`);
   }
 
   save(project: T): Promise<T> {
-    return firstValueFrom(this.httpClient.post(this._endpoint, project) as Observable<T>);
+    return firstValueFrom(this.httpClient.post<T>(this._endpoint, project));
   }
 }

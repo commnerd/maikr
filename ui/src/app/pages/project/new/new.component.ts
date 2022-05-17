@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjectService } from '@services/project.service';
 import { Project } from '@models/project';
 import { Router } from '@angular/router';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-new',
@@ -13,12 +12,7 @@ import { first } from 'rxjs';
 })
 export class NewComponent implements OnInit {
 
-  form: FormGroup = this.fb.group({
-    'name': ['', Validators.compose([Validators.required])],
-    'description': ['', Validators.compose([Validators.required])]
-  });
-
-  formSubmitted: boolean = false;
+  project!: Project;
 
   constructor(
     private fb: FormBuilder,
