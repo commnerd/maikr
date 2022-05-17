@@ -1,6 +1,6 @@
 ENVIRONMENTS = dev
-ENV = $(shell [ -f "env/make/Makefile.$*" ] && { echo "$*"; } || echo "dev";)
-TARGETS = $(filter-out $(ENVIRONMENTS) help, $(MAKECMDGOALS))
+ENV = $(shell [ -f "env/$*/make/Makefile" ] && { echo "$*"; } || echo "dev";)
+GOALS = $(filter-out $(ENVIRONMENTS) help, $(MAKECMDGOALS))
 
 .PHONY: help
 help:
@@ -12,10 +12,10 @@ help:
 	@for env in $(ENVIRONMENTS); do \
 		echo "  $${env} - Run $${env} environment subcommand"; \
 	done
-	@$(MAKE) -sf env/make/Makefile.$(ENV) env-help $(TARGETS) 2>/dev/null
+	@$(MAKE) -sf env/$(ENV)/make/Makefile env-help $(GOALS) 2>/dev/null
 
 dev:
-	@$(MAKE) -sf env/make/Makefile.$(ENV) serve $(TARGETS)
+	@$(MAKE) -sf env/$(ENV)/make/Makefile serve $(GOALS)
 
 %:
-	@$(MAKE) -sf env/make/Makefile.$(ENV) $(TARGETS)
+	@$(MAKE) -sf env/$(ENV)/make/Makefile $(GOALS)
