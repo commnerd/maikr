@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ProjectService } from '@services/project.service';
 import { Project, Type, Phase } from '@models/project';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ import { first } from 'rxjs';
   styleUrls: ['./definition.component.scss']
 })
 export class DefinitionComponent implements OnInit {
-
+  project!: Project;
   types: Array<string> = ["Software"];
   phases: Array<string> = ["Idea"];
 
@@ -26,14 +26,22 @@ export class DefinitionComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    console.log(this.route.snapshot.params);
+    let id = this.route.snapshot.params['id'];
+    this.projectService.get(id).then((project: Project) => {
+      this.project = project;
+    });
   }
 
-  onSubmit(project: Project) {
-    this.projectService.save(project)
+  onSubmit(projectElements: Project) {
+    this.project.type = projectElements.type as Type;
+    this.project.phase = projectElements.phase as Phase;
+    this.projectService.save(this.project)
       .then(() => this.router.navigate(["/"]));
   }
 

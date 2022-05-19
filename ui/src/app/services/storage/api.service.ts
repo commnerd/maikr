@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { environment } from '@environments/environment';
+import { MongoModel } from '@maikr/lib/models/mongo-model';
 
 @Injectable({
   providedIn: 'root'
 })
-export abstract class ApiService<T> {
+export abstract class ApiService<T extends MongoModel> {
 
   private readonly headers: Headers =
     new Headers({
@@ -23,11 +24,18 @@ export abstract class ApiService<T> {
     private httpClient: HttpClient
   ) {}
 
-  list(): Observable<Array<T>> {
-    return this.httpClient.get(this._endpoint) as Observable<Array<T>>;
+  list(): Promise<Array<T>> {
+    return firstValueFrom(this.httpClient.get<Array<T>>(this._endpoint));
+  }
+
+  get(id: string): Promise<T> {
+    return firstValueFrom(this.httpClient.get<T>(`${this._endpoint}/${id}`));
   }
 
   save(project: T): Promise<T> {
-    return firstValueFrom(this.httpClient.post(this._endpoint, project) as Observable<T>);
+    if(project._id) {
+      return firstValueFrom(this.httpClient.put<T>(`${this._endpoint}/${project._id}`, project));
+    }
+    return firstValueFrom(this.httpClient.post<T>(this._endpoint, project));
   }
 }

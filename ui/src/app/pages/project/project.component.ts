@@ -12,7 +12,7 @@ import { ProjectService } from '@services/project.service';
 })
 export class ProjectComponent implements OnInit {
 
-  projects$: Observable<Array<Project>> = this.projectService.list();
+  projects$: Promise<Array<Project>> = this.projectService.list();
 
   constructor(
     private projectService: ProjectService,
