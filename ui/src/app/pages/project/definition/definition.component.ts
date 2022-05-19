@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ProjectService } from '@services/project.service';
-import { Project } from '@models/project';
+import { Project, Type, Phase } from '@models/project';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
 
@@ -12,6 +12,9 @@ import { first } from 'rxjs';
   styleUrls: ['./definition.component.scss']
 })
 export class DefinitionComponent implements OnInit {
+
+  types: Array<string> = ["Software"];
+  phases: Array<string> = ["Idea"];
 
   form: FormGroup = this.fb.group({
     'type': ['', Validators.compose([Validators.required])],

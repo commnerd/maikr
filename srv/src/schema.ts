@@ -6,6 +6,8 @@ mongoose.connect('mongodb://user:pass@mongodb/admin', {}, (err) => {
 });
 
 export const Project = mongoose.model('Project', new mongoose.Schema({
-  name: String,
-  description: String,
+  name: mongoose.SchemaTypes.String,
+  description: mongoose.SchemaTypes.String,
+  type: mongoose.SchemaTypes.String,
+  phase: mongoose.SchemaTypes.String,
 }));

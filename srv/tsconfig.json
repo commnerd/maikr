@@ -5,7 +5,7 @@
     "rootDir": "./src/",
     "esModuleInterop": true,
     "paths": {
-      "@lib/*": ["node_modules/@maikr/lib/*"]
+      "@lib/*": ["./node_modules/@maikr/lib/*"]
     }
   }
 }
