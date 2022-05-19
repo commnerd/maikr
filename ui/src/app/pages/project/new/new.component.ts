@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs';
 
 @Component({
-  selector: 'app-new',
+  selector: 'project-new',
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.scss']
 })

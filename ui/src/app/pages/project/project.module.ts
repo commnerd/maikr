@@ -7,14 +7,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProjectRoutingModule } from './project-routing.module';
-import { ProjectComponent } from '@pages/project/project.component';
-import { NewComponent } from '@pages/project/new/new.component';
+import { ProjectComponent } from './project.component';
+import { NewComponent } from './new/new.component';
+import { IndexComponent } from './index/index.component';
 import { ProjectService } from '@services/project.service';
 
 @NgModule({
   declarations: [
     ProjectComponent,
-    NewComponent
+    NewComponent,
+    IndexComponent
   ],
   imports: [
     CommonModule,

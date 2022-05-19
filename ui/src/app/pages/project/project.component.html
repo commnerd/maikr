@@ -1,15 +1,1 @@
-<div fxLayout="column" fxLayoutAlign="center">
-    <form>
-      <div fxLayoutAlign="center">
-        <h1>Poject(s)</h1>
-      </div>
-      <div fxLayoutAlign="center" style="margin-top:10px">
-        <ul style="width:50%" appearance="fill" fxLayoutAlign="center" >
-          <li *ngFor="let project of projects$ | async">{{ project.name }}</li>
-        </ul>
-      </div>
-      <div fxLayoutAlign="center" style="margin-top:20px">
-        <button (click)="newProject()" mat-raised-button color="primary">New Project</button>
-      </div>
-    </form>
-  </div>
+<router-outlet></router-outlet>
