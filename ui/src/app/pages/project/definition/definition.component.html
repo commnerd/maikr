@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayoutAlign="center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div fxLayoutAlign="center">
+        <mat-form-field style="width:50%" appearance="fill">
+          <mat-label>Project Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option>
+              -- Please Select a Type --
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['type'].invalid">Please enter a valid project type.</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="center" style="margin-top:10px">
+        <mat-form-field style="width:50%" appearance="fill">
+          <mat-label>Project Phase</mat-label>
+          <mat-select formControlName="phase">
+            <mat-option>
+              -- Please Select a Phase --
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['phase'].invalid">Please enter a phase.</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="center" style="margin-top:20px">
+        <button [disabled]="!form.valid || formSubmitted" type="submit" mat-raised-button color="primary">Submit</button>
+      </div>
+    </form>
+  </div>

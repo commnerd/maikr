@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { IndexComponent } from '@pages/project/index/index.component';
 import { NewComponent } from '@pages/project/new/new.component';
+import { DefinitionComponent } from './definition/definition.component';
 import { ProjectComponent } from './project.component';
 
 const routes: Routes = [
-  { path: '', component: ProjectComponent, children: [
-    { path: '', component: IndexComponent },
-    { path: 'new', component: NewComponent }
-  ]},
+  { path: '', component: ProjectComponent },
+  { path: 'new', component: NewComponent },
+  { path: 'definition', component: DefinitionComponent}
 ];
 
 @NgModule({

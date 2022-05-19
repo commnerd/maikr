@@ -4,17 +4,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProjectService } from '@services/project.service';
 import { Project } from '@models/project';
 import { Router } from '@angular/router';
+import { first } from 'rxjs';
 
 @Component({
-  selector: 'project-new',
-  templateUrl: './new.component.html',
-  styleUrls: ['./new.component.scss']
+  selector: 'project-definition',
+  templateUrl: './definition.component.html',
+  styleUrls: ['./definition.component.scss']
 })
-export class NewComponent implements OnInit {
+export class DefinitionComponent implements OnInit {
 
   form: FormGroup = this.fb.group({
-    'name': ['', Validators.compose([Validators.required])],
-    'description': ['', Validators.compose([Validators.required])]
+    'type': ['', Validators.compose([Validators.required])],
+    'phase': ['', Validators.compose([Validators.required])]
   });
 
   formSubmitted: boolean = false;
@@ -30,7 +31,7 @@ export class NewComponent implements OnInit {
 
   onSubmit(project: Project) {
     this.projectService.save(project)
-      .then(() => this.router.navigate(["/definition"]));
+      .then(() => this.router.navigate(["/"]));
   }
 
 }
