@@ -11,6 +11,7 @@ export enum Phase {
 export enum Type {
     Software = "Software",
 }
+
 export interface Project extends MongoModel {
     name: string;
     description: string;
