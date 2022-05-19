@@ -4,7 +4,7 @@
         <h1>Poject(s)</h1>
         </div>
         <div fxLayoutAlign="center" style="margin-top:10px">
-        <ul style="width:50%" appearance="fill" fxLayoutAlign="center" >
+        <ul style="width:50%" appearance="fill">
             <li *ngFor="let project of projects$ | async">{{ project.name }}</li>
         </ul>
         </div>

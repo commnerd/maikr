@@ -12,10 +12,8 @@ export enum Type {
     Software = "Software",
 }
 export interface Project extends MongoModel {
-    _id: string;
     name: string;
     description: string;
     type?: Type;
     phase?: Phase;
-    __v: number;
 }
