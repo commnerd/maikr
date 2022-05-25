@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
+import { TaskService } from '@services/task.service';
+import { Task } from '@maikr/lib/models/task';
 
 @Component({
   selector: 'app-mvp',
@@ -8,24 +11,38 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 })
 export class MvpComponent implements OnInit {
 
-  constructor() { }
+  tasks!: Array<Task>;
+  tmpTask?: Task
+
+  constructor(
+    private taskService: TaskService,
+  ) { }
 
   ngOnInit(): void {
+    this.taskService.list().then((tasks: Task[]) => {
+      tasks.push({short: ""} as Task);
+      this.tasks = tasks;
+    });
   }
 
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi',
-    'Episode IX – The Rise of Skywalker',
-  ];
+  drop(event: CdkDragDrop<Array<Task>>) {
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+  }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+  blurLine(task: Task, value: any) {
+    task.short = value;
+    if(this.tasks[this.tasks.length - 1].short != "") {
+      this.tasks.push({short: ""} as Task);
+    }
+  }
+
+  keyUp(event: KeyboardEvent) {
+    if(event.key === 'Enter'){
+      event.target?.dispatchEvent(new Event('blur'))
+    }
+  }
+
+  doubleClick(event: FocusEvent){
+    event.target?.dispatchEvent(new Event('value'))
   }
 }

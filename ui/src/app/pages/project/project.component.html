@@ -7,7 +7,9 @@
         </div>
         <div fxLayoutAlign="center" style="margin-top:10px">
         <ul style="width:50%" appearance="fill">
-            <li *ngFor="let project of projects$ | async">{{ project.name }}</li>
+            <li *ngFor="let project of projects$ | async">{{ project.name }} -&gt;
+                <a [routerLink]="nextLink(project)">{{ nextLabel(project) }}</a>
+            </li>
         </ul>
         </div>
         <div fxLayoutAlign="center" style="margin-top:20px">

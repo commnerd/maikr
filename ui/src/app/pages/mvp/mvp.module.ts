@@ -4,6 +4,7 @@ import { MvpComponent } from './mvp.component';
 import { MVPRoutingModule } from './mvp-routing.module';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   imports: [
     CommonModule,
     MVPRoutingModule,
-    DragDropModule
+    DragDropModule,
+    MatInputModule
   ]
 })
 export class MvpModule { }

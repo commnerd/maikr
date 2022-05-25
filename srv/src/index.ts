@@ -1,7 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { Project as ProjectInterface } from '@maikr/lib/models/project';
+import { Task as TaskInterface } from '@maikr/lib/models/task';
+import { Project, Task } from './schema';
 import { Endpoint } from './endpoint';
-import { Project } from './schema';
 const app = express();
 const port = 3000;
 
@@ -14,8 +15,10 @@ app.use(function(req, res, next) {
 });
 
 
-Endpoint<ProjectInterface>(app, Project, '/api/v0.1.0/projects');
-app.get('/api/health-check', async (request: Request, response: Response, next: NextFunction) => {
+Endpoint<ProjectInterface>(app, Project, '/projects');
+Endpoint<TaskInterface>(app, Task, '/tasks');
+
+app.get('/health-check', async (request: Request, response: Response, next: NextFunction) => {
   response.status(200).json({'status': 'healthy'});
 });
 

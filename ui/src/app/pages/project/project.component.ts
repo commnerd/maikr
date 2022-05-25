@@ -19,4 +19,12 @@ export class ProjectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {}
+
+  nextLink(project: Project): Array<string> {
+    return ["/", "mvp", project._id];
+  }
+
+  nextLabel(project: Project): string {
+    return 'mvp';
+  }
 }
