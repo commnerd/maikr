@@ -16,3 +16,10 @@ export const Project = mongoose.model('Project', new mongoose.Schema({
   type: mongoose.SchemaTypes.String,
   phase: mongoose.SchemaTypes.String,
 }));
+
+export const Task = mongoose.model('Task', new mongoose.Schema({
+  parent_project: mongoose.SchemaTypes.ObjectId,
+  parent_task: mongoose.SchemaTypes.ObjectId,
+  short: mongoose.SchemaTypes.String,
+  long: mongoose.SchemaTypes.String,
+}));
