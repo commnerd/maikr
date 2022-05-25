@@ -1,8 +1,5 @@
 FROM node
 
-ENV USER  1000
-ENV GROUP 1000
-
 EXPOSE 4200
 
 RUN bash -c 'npm install -g npm@8.10.0 @angular/cli'

@@ -6,9 +6,6 @@ services:
       - ./lib:/srv/lib:z
     ports:
       - ${UI_PORT:-4200}:4200
-    environment:
-      - UID=${UID}
-      - GID=${GID:-${UID}}
   srv:
     build: docker/srv
     volumes:
@@ -17,23 +14,25 @@ services:
     ports:
       - ${SRV_PORT:-3000}:3000
     environment:
-      - USER=${UID}
-      - GID=${GID:-${UID}}
+      - MONGO_USER=${MONGO_USER:-user}
+      - MONGO_PASS=${MONGO_PASS:-pass}
+      - MONGO_URL=${MONGO_URL:-mongodb}
+      - MONGO_TABLE=${MONGO_TABLE:-admin}
   mongodb:
     image: mongo:5.0.8
     ports:
-      - 2717:27017
+      - ${DB_PORT:-2717}:27017
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=user
-      - MONGO_INITDB_ROOT_PASSWORD=pass
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-user}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS:-pass}
   mongo-express:
     image: mongo-express
     restart: always
     ports:
-      - 8083:8081
+      - ${ME_PORT:-8081}:8081
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: user
-      ME_CONFIG_MONGODB_ADMINPASSWORD: pass
-      ME_CONFIG_MONGODB_URL: mongodb://user:pass@mongodb:27017/
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USER:-user}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASS:-pass}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USER:-user}:${MONGO_PASS:-pass}@${MONGO_URL:-mongodb}:27017/
     depends_on:
       - mongodb
