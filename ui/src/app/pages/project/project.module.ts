@@ -12,6 +12,7 @@ import { ProjectComponent } from './project.component';
 import { NewComponent } from './new/new.component';
 import { ProjectService } from '@services/project.service';
 import { DefinitionComponent } from './definition/definition.component';
+import { MainNavModule } from '@templates/main-nav/main-nav.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DefinitionComponent } from './definition/definition.component';
     MatSelectModule,
     ReactiveFormsModule,
     ProjectRoutingModule,
+    MainNavModule,
   ],
   providers: [ProjectService],
 })
