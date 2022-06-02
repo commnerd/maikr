@@ -1,11 +1,5 @@
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let task of tasks" cdkDrag>
-        <span *ngIf="task.short.length <= 0">
-          <mat-form-field appearance="fill">
-            <mat-label>MVP Item</mat-label>
-            <input #input (keyup)="keyUp($event)" (blur)="blurLine(task, input.value)" matInput />
-          </mat-form-field>
-        </span>
-        <span *ngIf="task.short.length > 0" (dblclick)="doubleClick($event)">{{ task.short }}</span>
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let task of tasks; index as taskIndex" cdkDrag>
+        <text-edit [input]="task.short" (inputChange)="update(taskIndex, $event)">MVP Item</text-edit>
     </div>
 </div>

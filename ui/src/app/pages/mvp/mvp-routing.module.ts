@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MvpComponent } from './mvp.component';
 
 const routes: Routes = [
-  { path: '', component: MvpComponent },
+  { path: ':projectId', component: MvpComponent },
 ];
 
 @NgModule({

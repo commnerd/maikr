@@ -11,8 +11,7 @@ import { Task } from '@maikr/lib/models/task';
 })
 export class MvpComponent implements OnInit {
 
-  tasks!: Array<Task>;
-  tmpTask?: Task
+  tasks: Array<Task> = [];
 
   constructor(
     private taskService: TaskService,
@@ -20,29 +19,25 @@ export class MvpComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskService.list().then((tasks: Task[]) => {
-      tasks.push({short: ""} as Task);
       this.tasks = tasks;
+      tasks.push({short: ""} as Task);
     });
   }
 
   drop(event: CdkDragDrop<Array<Task>>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+    this.update(event.currentIndex, this.tasks[event.currentIndex].short);
   }
 
-  blurLine(task: Task, value: any) {
-    task.short = value;
-    if(this.tasks[this.tasks.length - 1].short != "") {
+  update(taskIndex: number, value: string) {
+    if(value.length > 0) {
+      this.tasks[taskIndex].short = value;
+    }
+    else {
+      this.tasks.splice(taskIndex, 1);
+    }
+    if(taskIndex == this.tasks.length - 1) {
       this.tasks.push({short: ""} as Task);
     }
-  }
-
-  keyUp(event: KeyboardEvent) {
-    if(event.key === 'Enter'){
-      event.target?.dispatchEvent(new Event('blur'))
-    }
-  }
-
-  doubleClick(event: FocusEvent){
-    event.target?.dispatchEvent(new Event('value'))
   }
 }
