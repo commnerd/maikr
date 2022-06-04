@@ -15,6 +15,9 @@ app.use(function(req, res, next) {
 
 
 Endpoint<ProjectInterface>(app, Project, '/api/v0.1.0/projects');
+app.get('/api/health-check', async (request: Request, response: Response, next: NextFunction) => {
+  response.status(200).json({'status': 'healthy'});
+});
 
 app.listen(port, () => {
   console.log(`Running on port ${port}.`);
