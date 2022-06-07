@@ -8,7 +8,7 @@ class EndpointClass<T> {
         private endpoint: string
     ) {
         this.app.get(this.endpoint, this.list.bind(this));
-        this.app.get(`${this.endpoint}/:id`, this.list.bind(this));
+        this.app.get(`${this.endpoint}/:id`, this.get.bind(this));
         this.app.post(this.endpoint, this.store.bind(this));
         this.app.put(`${this.endpoint}/:id`, this.update.bind(this));
     }

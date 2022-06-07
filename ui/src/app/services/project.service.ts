@@ -6,5 +6,5 @@ import { ApiService } from './storage/api.service';
   providedIn: 'root'
 })
 export class ProjectService extends ApiService<Project> {
-  protected override endpoint: string = "/api/v0.1.0/projects";
+  protected override endpoint: string = "/projects";
 }

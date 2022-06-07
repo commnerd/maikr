@@ -18,10 +18,6 @@ export class MvpComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.taskService.list().then((tasks: Task[]) => {
-      this.tasks = tasks;
-      tasks.push({short: ""} as Task);
-    });
   }
 
   drop(event: CdkDragDrop<Array<Task>>) {

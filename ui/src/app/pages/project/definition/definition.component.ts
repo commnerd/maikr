@@ -41,6 +41,7 @@ export class DefinitionComponent implements OnInit {
   onSubmit(projectElements: Project) {
     this.project.type = projectElements.type as Type;
     this.project.phase = projectElements.phase as Phase;
+    console.log("Component project:", this.project);
     this.projectService.save(this.project)
       .then(() => this.router.navigate(["/"]));
   }

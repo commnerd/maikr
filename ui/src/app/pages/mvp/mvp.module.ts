@@ -5,6 +5,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MvpComponent } from './mvp.component';
 import { MVPRoutingModule } from './mvp-routing.module';
 import { TextEditModule } from 'src/app/templates/text-edit/text-edit.module';
+import { MainNavModule } from '@templates/main-nav/main-nav.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { TextEditModule } from 'src/app/templates/text-edit/text-edit.module';
     MVPRoutingModule,
     DragDropModule,
     TextEditModule,
+    MainNavModule
   ]
 })
 export class MvpModule { }
