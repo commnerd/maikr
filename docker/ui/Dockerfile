@@ -8,4 +8,4 @@ VOLUME  /srv/ui
 VOLUME  /srv/lib
 WORKDIR /srv/ui
 
-ENTRYPOINT [ "bash", "-c", "npm install && ng serve --host 0.0.0.0 --disable-host-check" ]
+ENTRYPOINT [ "bash", "-c", "npm install && ng serve --host 0.0.0.0 --port 4200" ]
