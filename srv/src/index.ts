@@ -1,7 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { Project as ProjectInterface } from '@maikr/lib/models/project';
 import { Task as TaskInterface } from '@maikr/lib/models/task';
-import { Project, Task } from './schema';
+import { ListItem as ListItemInterface } from '@maikr/lib/models/list-item';
+import { ListItem, Project, Task } from './schema';
 import { Endpoint } from './endpoint';
 const app = express();
 const port = 3000;
@@ -14,7 +15,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-
+Endpoint<ListItemInterface>(app, ListItem, '/list-items');
 Endpoint<ProjectInterface>(app, Project, '/projects');
 Endpoint<TaskInterface>(app, Task, '/tasks');
 

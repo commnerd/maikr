@@ -23,3 +23,25 @@ export const Task = mongoose.model('Task', new mongoose.Schema({
   short: mongoose.SchemaTypes.String,
   long: mongoose.SchemaTypes.String,
 }));
+
+export const List = mongoose.model('List', new mongoose.Schema({
+  name: mongoose.SchemaTypes.String,
+}));
+
+export const ListListItem = mongoose.model('ListListItem', new mongoose.Schema({
+  list: mongoose.SchemaTypes.ObjectId,
+  list_item: mongoose.SchemaTypes.ObjectId,
+}));
+
+export const Log = mongoose.model('Log', new mongoose.Schema({
+  name: mongoose.SchemaTypes.String,
+}));
+
+export const LogListItem = mongoose.model('LogListItem', new mongoose.Schema({
+  log: mongoose.SchemaTypes.ObjectId,
+  list_item: mongoose.SchemaTypes.ObjectId,
+}));
+
+export const ListItem = mongoose.model('ListItem', new mongoose.Schema({
+  entry: mongoose.SchemaTypes.String,
+}));
