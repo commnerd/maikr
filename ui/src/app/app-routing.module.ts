@@ -11,6 +11,14 @@ const routes: Routes = [
     path: "mvp",
     loadChildren: () => import('@pages/mvp/mvp.module').then(m => m.MvpModule)
   },
+  {
+    path: "lists",
+    loadChildren: () => import('@pages/list/list.module').then(m => m.ListModule)
+  },
+  {
+    path: "logs",
+    loadChildren: () => import('@pages/log/log.module').then(m => m.LogModule)
+  },
 ];
 
 @NgModule({
