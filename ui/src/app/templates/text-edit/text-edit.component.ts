@@ -1,17 +1,18 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'text-edit',
   templateUrl: './text-edit.component.html',
   styleUrls: ['./text-edit.component.scss']
 })
-export class TextEditComponent implements OnInit {
+export class TextEditComponent implements OnInit, AfterViewInit {
 
   editMode: boolean = false;
 
   @Input() input!: string;
   @Output() inputChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() editing: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @ViewChild('inputRef') inputRef!: ElementRef;
 
   constructor() { }
 
@@ -22,9 +23,9 @@ export class TextEditComponent implements OnInit {
   }
 
   blur() {
-    this.inputChange.emit(this.input);
     if(this.input.length > 0) {
       this.editMode = false;
+      this.inputChange.emit(this.input);
     }
   }
 
@@ -36,6 +37,15 @@ export class TextEditComponent implements OnInit {
 
   doubleClick(event: FocusEvent){
     this.editMode = true;
+    setTimeout(() => {
+      this.inputRef.nativeElement.focus();
+    }, 0);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.inputRef.nativeElement.focus();
+    }, 0);
   }
 
 }

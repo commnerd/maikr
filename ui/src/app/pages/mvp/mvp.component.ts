@@ -31,9 +31,13 @@ export class MvpComponent implements OnInit {
       this.tasks[taskIndex].short = value;
     }
     else {
-      this.tasks.splice(taskIndex, 1);
+      this.remove(taskIndex);
     }
     this.appendEmptyTask();
+  }
+
+  remove(taskIndex: number) {
+    this.tasks.splice(taskIndex, 1);
   }
 
   appendEmptyTask() {
