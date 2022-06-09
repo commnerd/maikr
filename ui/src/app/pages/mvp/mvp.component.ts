@@ -18,6 +18,7 @@ export class MvpComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.appendEmptyTask();
   }
 
   drop(event: CdkDragDrop<Array<Task>>) {
@@ -32,7 +33,14 @@ export class MvpComponent implements OnInit {
     else {
       this.tasks.splice(taskIndex, 1);
     }
-    if(taskIndex == this.tasks.length - 1) {
+    this.appendEmptyTask();
+  }
+
+  appendEmptyTask() {
+    if(
+      this.tasks.length <= 0 ||
+      this.tasks[this.tasks.length - 1].short.length > 0
+    ) {
       this.tasks.push({short: ""} as Task);
     }
   }
