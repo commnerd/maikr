@@ -13,6 +13,7 @@ import { NewComponent } from './new/new.component';
 import { ProjectService } from '@services/project.service';
 import { DefinitionComponent } from './definition/definition.component';
 import { MainNavModule } from '@templates/main-nav/main-nav.module';
+import { CenteredContentModule } from '@templates/centered-content/centered-content.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MainNavModule } from '@templates/main-nav/main-nav.module';
     ReactiveFormsModule,
     ProjectRoutingModule,
     MainNavModule,
+    CenteredContentModule
   ],
   providers: [ProjectService],
 })

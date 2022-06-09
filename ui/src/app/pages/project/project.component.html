@@ -1,19 +1,18 @@
-<div fxLayout="column" fxLayoutAlign="center">
-    <main-nav></main-nav>
+<main-nav></main-nav>
 
+<centered-content>
     <form>
-        <div fxLayoutAlign="center">
         <h1>Poject(s)</h1>
-        </div>
-        <div fxLayoutAlign="center" style="margin-top:10px">
-        <ul style="width:50%" appearance="fill">
+        <div style="margin-top:10px">
+        <ul>
             <li *ngFor="let project of projects$ | async">{{ project.name }} -&gt;
                 <a [routerLink]="nextLink(project)">{{ nextLabel(project) }}</a>
             </li>
         </ul>
         </div>
-        <div fxLayoutAlign="center" style="margin-top:20px">
-        <a routerLink="new" mat-raised-button color="primary">New Project</a>
+        <div style="margin-top:20px">
+            <a routerLink="new" mat-raised-button color="primary">New Project</a>
         </div>
     </form>
-</div>
+</centered-content>
+

@@ -1,8 +1,10 @@
 <main-nav></main-nav>
 
-<div cdkDropList (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let task of tasks; index as taskIndex" cdkDrag>
-        <text-edit [input]="task.short" (inputChange)="update(taskIndex, $event)">MVP Item</text-edit>
-        <button *ngIf="task.short.length > 0" (click)="remove(taskIndex)">X</button>
+<centered-content>
+    <div cdkDropList (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let task of tasks; index as taskIndex" cdkDrag>
+            <text-edit [input]="task.short" (inputChange)="update(taskIndex, $event)">MVP Item</text-edit>
+            <button *ngIf="task.short.length > 0" (click)="remove(taskIndex)">X</button>
+        </div>
     </div>
-</div>
+</centered-content>
