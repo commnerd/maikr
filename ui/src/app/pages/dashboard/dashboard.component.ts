@@ -7,11 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  panelOpenState: boolean = false;
+  step = 0;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
   }
 
 }
