@@ -1,5 +1,9 @@
 <mat-toolbar>
-  <span>Maikr</span>
-  <button mat-button routerLink="/lists">Lists</button>
-  <button mat-button routerLink="/logs">Logs</button>
+  <div fxFlex>
+    <a href="#" mat-button>Maikr</a>
+    <a mat-button href="/lists">Lists</a>
+    <a mat-button href="/logs">Logs</a>
+  </div>
+  
+  <ng-content></ng-content>
 </mat-toolbar>
