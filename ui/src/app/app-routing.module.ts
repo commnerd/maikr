@@ -23,6 +23,10 @@ const routes: Routes = [
     path: "logs",
     loadChildren: () => import('@pages/log/log.module').then(m => m.LogModule)
   },
+  {
+    path: "settings",
+    loadChildren: () => import('@pages/settings/settings.module').then(m => m.SettingsModule)
+  },
 ];
 
 @NgModule({

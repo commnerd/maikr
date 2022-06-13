@@ -1,56 +1,59 @@
-<mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Today's Tasks
-        </mat-panel-title>
-        <mat-panel-description>
-          A list of tasks compiled by our custom engine.
-          <mat-icon>account_circle</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-  
-      Content will go here
-  
-      <mat-action-row>
-        <button mat-button color="primary" (click)="nextStep()">Next</button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Projects
-        </mat-panel-title>
-        <mat-panel-description>
-          A listing of all the projects you have created.
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      Stuff can also go here
-
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" (click)="nextStep()">Next</button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Tasks to Triage
-        </mat-panel-title>
-        <mat-panel-description>
-          A list of tasks that do not belong to a project
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-  
-      Just what it says
-  
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" (click)="nextStep()">End</button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  
-  </mat-accordion>
+<main-nav></main-nav>
+<centered-content>
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Today's Tasks
+            </mat-panel-title>
+            <mat-panel-description>
+              A list of tasks compiled by our custom engine.
+              <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+      
+          Content will go here
+      
+          <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">Next</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      
+        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Projects
+            </mat-panel-title>
+            <mat-panel-description>
+              A listing of all the projects you have created.
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+    
+          Stuff can also go here
+    
+          <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">Previous</button>
+            <button mat-button color="primary" (click)="nextStep()">Next</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      
+        <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Tasks to Triage
+            </mat-panel-title>
+            <mat-panel-description>
+              A list of tasks that do not belong to a project
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+      
+          Just what it says
+      
+          <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">Previous</button>
+            <button mat-button color="primary" (click)="nextStep()">End</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      
+      </mat-accordion>
+</centered-content>

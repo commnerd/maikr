@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LogComponent } from './log.component';
+import { MainNavModule } from '@templates/main-nav/main-nav.module';
+import { LogRoutingModule } from './log-routing.module';
 
 
 
@@ -9,7 +11,9 @@ import { LogComponent } from './log.component';
     LogComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    LogRoutingModule,
+    MainNavModule
   ]
 })
 export class LogModule { }
