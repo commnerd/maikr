@@ -25,6 +25,7 @@
   "homepage": "https://github.com/commnerd/maikr-srv#readme",
   "dependencies": {
     "@maikr/lib": "file:../lib",
+    "cron": "^2.0.0",
     "express": "^4.18.1",
     "mongoose": "^6.3.3"
   },

@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-let user = process.env.MONGO_USER;
-let pass = process.env.MONGO_PASS;
-let url = process.env.MONGO_URL;
-let table = process.env.MONGO_TABLE;
+const user = process.env.MONGO_USER;
+const pass = process.env.MONGO_PASS;
+const url = process.env.MONGO_URL;
+const table = process.env.MONGO_TABLE;
 
 mongoose.set('debug', true);
 mongoose.connect(`mongodb://${user}:${pass}@${url}/${table}`, {}, (err) => {
@@ -22,6 +22,8 @@ export const Task = mongoose.model('Task', new mongoose.Schema({
   parent_task: mongoose.SchemaTypes.ObjectId,
   short: mongoose.SchemaTypes.String,
   long: mongoose.SchemaTypes.String,
+  created_at: mongoose.SchemaTypes.Date,
+  updated_at: mongoose.SchemaTypes.Date,
 }));
 
 export const List = mongoose.model('List', new mongoose.Schema({
@@ -44,4 +46,9 @@ export const LogListItem = mongoose.model('LogListItem', new mongoose.Schema({
 
 export const ListItem = mongoose.model('ListItem', new mongoose.Schema({
   entry: mongoose.SchemaTypes.String,
+}));
+
+export const Word = mongoose.model('Word', new mongoose.Schema({
+  word: mongoose.SchemaTypes.String,
+  collected_at: mongoose.SchemaTypes.Date,
 }));
