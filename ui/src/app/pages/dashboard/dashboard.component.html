@@ -29,8 +29,31 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
     
-          Stuff can also go here
-    
+          <mat-action-row>
+              <div fxLayoutAlign="center">
+                <mat-form-field appearance="fill">
+                  <mat-label>Project Type</mat-label>
+                  <mat-select>
+                    <mat-option>ALL</mat-option>
+                    <mat-option *ngFor="let type of projectTypes" value="{{ type }}">{{ type }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>Project Phase</mat-label>
+                  <mat-select>
+                    <mat-option>ALL</mat-option>
+                    <mat-option *ngFor="let type of projectPhases" value="{{ type }}">{{ type }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+          </mat-action-row>
+          <mat-action-row>
+            <ul>
+              <li *ngFor="let project of projects$ | async">
+                <a [routerLink]="['/projects', project._id]">{{ project.name }}</a>
+              </li>
+            </ul>
+          </mat-action-row>
           <mat-action-row>
             <button mat-button color="warn" (click)="prevStep()">Previous</button>
             <button mat-button color="primary" (click)="nextStep()">Next</button>

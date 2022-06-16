@@ -1,8 +1,12 @@
-import { NgModule } from '@angular/core';
+import { forwardRef, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+
+import { Phase as ProjectPhase, Type as ProjectType } from '@maikr/lib/models/project';
 
 import { CenteredContentModule } from '@templates/centered-content/centered-content.module';
 import { MainNavModule } from '@templates/main-nav/main-nav.module';
@@ -17,11 +21,13 @@ import { DashboardComponent } from './dashboard.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     DashboardRoutingModule,
     MatExpansionModule,
     CenteredContentModule,
+    MatSelectModule,
     MainNavModule,
     MatIconModule
-  ]
+  ],
 })
 export class DashboardModule { }
