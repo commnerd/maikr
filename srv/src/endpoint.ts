@@ -24,6 +24,7 @@ class EndpointClass<T> {
     store = (request: Request, response: Response, next: NextFunction) => {
         let model = new this.model(request.body);
         model.save().then((prj) => {
+            console.log(model);
             response.status(200).json(prj);
         });
     };

@@ -17,7 +17,7 @@ async function collectWords(): Promise<void> {
 
 async function getNewTasks(): Promise<Array<TaskInterface>> {
     let startDate = await getLastWordDate();
-    return await Task.find({updated_at:{$gt:ISODate(startDate)}})
+    return await Task.find({updated_at:{$gt:startDate}})
 }
 
 async function getLastWordDate(): Promise<Date> {

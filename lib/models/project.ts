@@ -15,7 +15,7 @@ export enum Type {
     Work = "Work",
 }
 
-export interface Project extends MongoModel {
+export interface Project extends MongoModel, DateTracked {
     name: string;
     description: string;
     type?: Type;
