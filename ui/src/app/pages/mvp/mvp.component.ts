@@ -22,13 +22,20 @@ export class MvpComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<Array<Task>>) {
+    // let batchUpdate: Array<Task> = [];
+    // let firstIndex = event.previousIndex <= event.currentIndex ? event.previousIndex : event.currentIndex;
+    // let lastIndex = event.previousIndex > event.currentIndex ? event.currentIndex : event.previousIndex;
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-    this.update(event.currentIndex, this.tasks[event.currentIndex].short);
+    // for(let i = firstIndex; i < lastIndex; i++) {
+    //   batchUpdate.push(this.tasks[i]);
+    // }
+    this.taskService.updateBatch(this.tasks).then(b => console.log(b));
   }
 
   update(taskIndex: number, value: string) {
     if(value.length > 0) {
       this.tasks[taskIndex].short = value;
+      this.taskService.save(this.tasks[taskIndex]).then(task => { this.tasks[taskIndex] = task });
     }
     else {
       this.remove(taskIndex);
@@ -37,7 +44,12 @@ export class MvpComponent implements OnInit {
   }
 
   remove(taskIndex: number) {
-    this.tasks.splice(taskIndex, 1);
+    if(this.tasks[taskIndex]._id != undefined) {
+      this.taskService.delete(this.tasks[taskIndex]._id).then(() => this.tasks.splice(taskIndex, 1));
+    }
+    else {
+      this.tasks.splice(taskIndex, 1);
+    }
   }
 
   appendEmptyTask() {

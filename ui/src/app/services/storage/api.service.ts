@@ -32,10 +32,18 @@ export abstract class ApiService<T extends MongoModel> {
     return firstValueFrom(this.httpClient.get<T>(`${this._endpoint}/${id}`));
   }
 
-  save(project: T): Promise<T> {
-    if(project._id) {
-      return firstValueFrom(this.httpClient.put<T>(`${this._endpoint}/${project._id}`, project));
+  save(el: T): Promise<T> {
+    if(el._id) {
+      return firstValueFrom(this.httpClient.put<T>(`${this._endpoint}/${el._id}`, el));
     }
-    return firstValueFrom(this.httpClient.post<T>(this._endpoint, project));
+    return firstValueFrom(this.httpClient.post<T>(this._endpoint, el));
+  }
+
+  delete(id: string): Promise<boolean> {
+    return firstValueFrom(this.httpClient.delete<boolean>(id));
+  }
+
+  updateBatch(batch: Array<T>): Promise<Array<T>> {
+    return firstValueFrom(this.httpClient.put<Array<T>>(`${this._endpoint}/batch_update`, batch));
   }
 }
