@@ -12,7 +12,9 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
       
-          Content will go here
+          <ol>
+            <li *ngFor="let task of tasksForToday$ | async">{{ task.short }}</li>
+          </ol>
       
           <mat-action-row>
             <button mat-button color="primary" (click)="nextStep()">Next</button>
@@ -70,7 +72,9 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
       
-          Just what it says
+          <ol>
+            <li *ngFor="let task of tasksToTriage$ | async">{{ task.short }}</li>
+          </ol>
       
           <mat-action-row>
             <button mat-button color="warn" (click)="prevStep()">Previous</button>

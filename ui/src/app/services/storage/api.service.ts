@@ -24,8 +24,8 @@ export abstract class ApiService<T extends MongoModel> {
     private httpClient: HttpClient
   ) {}
 
-  list(): Promise<Array<T>> {
-    return firstValueFrom(this.httpClient.get<Array<T>>(this._endpoint));
+  list(filter?: Object): Promise<Array<T>> {
+    return firstValueFrom(this.httpClient.get<Array<T>>(this._endpoint, filter));
   }
 
   get(id: string): Promise<T> {
