@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Phase as ProjectPhase, Type as ProjectType } from '@maikr/lib/models/project';
 
 import { CenteredContentModule } from '@templates/centered-content/centered-content.module';
+import { TextEditModule } from '@templates/text-edit/text-edit.module';
 import { MainNavModule } from '@templates/main-nav/main-nav.module';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -25,6 +26,7 @@ import { DashboardComponent } from './dashboard.component';
     DashboardRoutingModule,
     MatExpansionModule,
     CenteredContentModule,
+    TextEditModule,
     MatSelectModule,
     MainNavModule,
     MatIconModule

@@ -23,13 +23,17 @@ class EndpointClass<T> {
 
     store = (request: Request, response: Response, next: NextFunction) => {
         let model = new this.model(request.body);
-        model.save().then((prj) => {
-            console.log(model);
+        model.save().then(prj => response.status(200).json(prj));
+    };
+
+    update = async (request: Request, response: Response, next: NextFunction) => {
+        let model = await this.model.findById(request.params['id']);
+        model.overwrite(request.body).save().then((prj) => {
             response.status(200).json(prj);
         });
     };
 
-    update = async (request: Request, response: Response, next: NextFunction) => {
+    updateBatch = async (request: Request, response: Response, next: NextFunction) => {
         let model = await this.model.findById(request.params['id']);
         model.overwrite(request.body).save().then((prj) => {
             response.status(200).json(prj);

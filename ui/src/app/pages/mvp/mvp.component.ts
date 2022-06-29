@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { TaskService } from '@services/task.service';
 import { Task } from '@maikr/lib/models/task';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-mvp',
@@ -11,53 +11,30 @@ import { Task } from '@maikr/lib/models/task';
 })
 export class MvpComponent implements OnInit {
 
+  projectId!: string; 
   tasks: Array<Task> = [];
 
   constructor(
+    private route: ActivatedRoute,
     private taskService: TaskService,
   ) { }
 
   ngOnInit(): void {
-    this.appendEmptyTask();
+    this.initProjectIdFromPath();
   }
 
-  drop(event: CdkDragDrop<Array<Task>>) {
-    // let batchUpdate: Array<Task> = [];
-    // let firstIndex = event.previousIndex <= event.currentIndex ? event.previousIndex : event.currentIndex;
-    // let lastIndex = event.previousIndex > event.currentIndex ? event.currentIndex : event.previousIndex;
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-    // for(let i = firstIndex; i < lastIndex; i++) {
-    //   batchUpdate.push(this.tasks[i]);
-    // }
-    this.taskService.updateBatch(this.tasks).then(b => console.log(b));
+  update(tasks: Array<Task>) {
+    this.tasks = tasks.map((value) => {
+      value.parent_project = this.projectId;
+      return value;
+    }) as Array<Task>;
+    this.taskService.updateBatch(this.tasks);
   }
 
-  update(taskIndex: number, value: string) {
-    if(value.length > 0) {
-      this.tasks[taskIndex].short = value;
-      this.taskService.save(this.tasks[taskIndex]).then(task => { this.tasks[taskIndex] = task });
-    }
-    else {
-      this.remove(taskIndex);
-    }
-    this.appendEmptyTask();
-  }
-
-  remove(taskIndex: number) {
-    if(this.tasks[taskIndex]._id != undefined) {
-      this.taskService.delete(this.tasks[taskIndex]._id).then(() => this.tasks.splice(taskIndex, 1));
-    }
-    else {
-      this.tasks.splice(taskIndex, 1);
-    }
-  }
-
-  appendEmptyTask() {
-    if(
-      this.tasks.length <= 0 ||
-      this.tasks[this.tasks.length - 1].short.length > 0
-    ) {
-      this.tasks.push({short: ""} as Task);
-    }
+  initProjectIdFromPath() {
+    let subscription = this.route.params.subscribe(rs => {
+      this.projectId = rs['projectId'];
+      subscription.unsubscribe();
+    })
   }
 }
