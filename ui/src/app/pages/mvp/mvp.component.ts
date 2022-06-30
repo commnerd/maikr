@@ -24,7 +24,7 @@ export class MvpComponent implements OnInit {
   }
 
   update(tasks: Array<Task>) {
-    this.tasks = tasks.map((value) => {
+    this.tasks = (tasks as unknown as Array<Task>).map((value) => {
       value.parent_project = this.projectId;
       return value;
     }) as Array<Task>;

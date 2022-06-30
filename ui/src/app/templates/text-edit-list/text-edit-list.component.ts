@@ -8,53 +8,45 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   templateUrl: './text-edit-list.component.html',
   styleUrls: ['./text-edit-list.component.scss']
 })
-export class TextEditListComponent<T extends {[key: string]: string}> implements OnInit {
+export class TextEditListComponent<T> implements OnInit {
 
   constructor() { }
 
-  @Input() list!: Array<T | string>;
-  @Input() key!: string;
+  @Input() list: Array<T> = [];
+  @Input() key: string = "";
 
-  modList: Array<string> = [];
+  strList: Array<string> = [];
 
-  @Output() listChanged = new EventEmitter<Array<T | string>>()
+  @Output() listChanged = new EventEmitter<Array<T>>()
 
   ngOnInit(): void {
-    this.modList = this.list.map((value: {[key: string]: string} | string) => {
-      if(this.key != undefined && value instanceof Object) {
-        return value[this.key] as string;
-      }
-      return value;
-    }) as string[];
+    this.strList = this.list.map(item => (item as unknown as {[key: string]: string})[this.key] as string);
   }
 
   drop(event: CdkDragDrop<Array<T>>) {
     moveItemInArray(this.list, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.strList, event.previousIndex, event.currentIndex);
     this.listChanged.next(this.list);
   }
 
   update(index: number, value: Event) {
-    if(this.key) {
-      this.list[index] = value as unknown as (T | string);
-    }
-    else {
-      this.remove(index);
-    }
+    (this.list[index] as unknown as {[list: string]: string})[this.key] = this.strList[index];
     this.appendEmptyTask();
   }
 
   remove(index: number) {
     this.list.splice(index, 1);
-    this.modList.splice(index, 1);
+    this.strList.splice(index, 1);
   }
 
   appendEmptyTask() {
     if(
-      this.modList.length <= 0 ||
-      this.modList[this.modList.length - 1].length > 0
+      this.list.length <= 0 ||
+      (this.list[this.list.length - 1] as unknown as {[list: string]: string})[this.key].length > 0
     ) {
       let newItem: T = {} as T;
       this.list.push(newItem);
+      this.strList.push("");
     }
   }
 }

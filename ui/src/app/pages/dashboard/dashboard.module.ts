@@ -1,4 +1,4 @@
-import { forwardRef, NgModule } from '@angular/core';
+import { forwardRef, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Phase as ProjectPhase, Type as ProjectType } from '@maikr/lib/models/project';
 
 import { CenteredContentModule } from '@templates/centered-content/centered-content.module';
-import { TextEditModule } from '@templates/text-edit/text-edit.module';
+import { TextEditListModule } from '@templates/text-edit-list/text-edit-list.module';
 import { MainNavModule } from '@templates/main-nav/main-nav.module';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -17,6 +17,9 @@ import { DashboardComponent } from './dashboard.component';
 
 
 @NgModule({
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   declarations: [
     DashboardComponent
   ],
@@ -26,7 +29,7 @@ import { DashboardComponent } from './dashboard.component';
     DashboardRoutingModule,
     MatExpansionModule,
     CenteredContentModule,
-    TextEditModule,
+    TextEditListModule,
     MatSelectModule,
     MainNavModule,
     MatIconModule
