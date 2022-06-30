@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -9,6 +9,9 @@ import { MainNavModule } from '@templates/main-nav/main-nav.module';
 import { CenteredContentModule } from '@templates/centered-content/centered-content.module';
 
 @NgModule({
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   declarations: [
     MvpComponent
   ],

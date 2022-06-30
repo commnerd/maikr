@@ -72,7 +72,7 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
 
-          <text-edit-list list="tasksToTriage$ | async" key="short"></text-edit-list>
+          <text-edit-list [list]="(tasksToTriage$ | async)!" key="short"></text-edit-list>
       
           <mat-action-row>
             <button mat-button color="warn" (click)="prevStep()">Previous</button>
