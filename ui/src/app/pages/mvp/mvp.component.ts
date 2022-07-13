@@ -34,7 +34,9 @@ export class MvpComponent implements OnInit {
   initProjectIdFromPath() {
     let subscription = this.route.params.subscribe(rs => {
       this.projectId = rs['projectId'];
-      subscription.unsubscribe();
-    })
+      setTimeout(() => {
+        subscription.unsubscribe();
+      }, 0);
+    });
   }
 }

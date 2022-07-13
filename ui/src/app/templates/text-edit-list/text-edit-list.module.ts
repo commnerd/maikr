@@ -1,6 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextEditListComponent } from './text-edit-list.component';
+
+import { TextEditModule } from '@templates/text-edit/text-edit.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
@@ -14,6 +16,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   ],
   imports: [
     CommonModule,
+    TextEditModule,
     DragDropModule
   ],
   exports: [
