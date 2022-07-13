@@ -57,8 +57,10 @@ export class TextEditListComponent<T> implements OnInit {
       ) {
         let newItem: T = {} as T;
         (newItem as unknown as {[list: string]: string})[this.key] = "";
-        this.list.push(newItem);
-        this.strList.push("");
+        setTimeout(() => {
+          this.list?.push(newItem);
+          this.strList.push("");
+        });
       }
     }
   }

@@ -44,7 +44,7 @@ export class TextEditComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.inputRef.nativeElement.focus();
+      this.inputRef?.nativeElement.focus();
     }, 0);
   }
 
