@@ -39,6 +39,7 @@ export class TextEditListComponent<T> implements OnInit {
       this.strList[index] = value;
       (this.list[index] as unknown as {[list: string]: string})[this.key] = this.strList[index];
       this.appendEmpty();
+      this.listChanged.next(this.list);
     }
   }
 
@@ -46,6 +47,7 @@ export class TextEditListComponent<T> implements OnInit {
     if(Array.isArray(this.list) && this.key != null) {
       this.list.splice(index, 1);
       this.strList.splice(index, 1);
+      this.listChanged.next(this.list);
     }
   }
 
