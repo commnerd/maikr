@@ -13,6 +13,7 @@ export class MvpComponent implements OnInit {
 
   projectId!: string; 
   tasks: Array<Task> = [];
+  taskShorts: Array<string> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -21,14 +22,18 @@ export class MvpComponent implements OnInit {
 
   ngOnInit(): void {
     this.initProjectIdFromPath();
+    this.taskService.list()
   }
 
-  update(tasks: Array<Task>) {
-    this.tasks = (tasks as unknown as Array<Task>).map((value) => {
-      value.parent_project = this.projectId;
-      return value;
-    }) as Array<Task>;
-    this.taskService.updateBatch(this.tasks);
+  update(taskShorts: Array<string>) {
+    let tasks = this.tasks.map((task, index) => {
+      task.parent_project = this.projectId;
+      task.short = taskShorts[index];
+      return task;
+    });
+    this.taskService.updateBatch(tasks).then(tasks => {
+      this.tasks = tasks;
+    });
   }
 
   initProjectIdFromPath() {
@@ -37,6 +42,13 @@ export class MvpComponent implements OnInit {
       setTimeout(() => {
         subscription.unsubscribe();
       }, 0);
+    });
+  }
+
+  initTasks(projectId: string) {
+    this.taskService.list({ parent_project: projectId }).then(tasks => {
+      this.tasks = tasks;
+      this.taskShorts = this.tasks.map(task => task.short);
     });
   }
 }

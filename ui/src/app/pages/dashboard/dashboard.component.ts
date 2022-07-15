@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Phase as ProjectPhase, Type as ProjectType } from '@maikr/lib/models/project';
-
+import { Task } from '@maikr/lib/models/task';
 import { ProjectService } from '@services/project.service';
 import { TaskService } from '@services/task.service';
 
@@ -15,7 +15,8 @@ export class DashboardComponent implements OnInit {
   projectTypes = Object.values(ProjectType || {});
   projectPhases = Object.keys(ProjectPhase || {});
   projects$ = this.projectService.list();
-  tasksToTriage$ = this.taskService.list({ parent_project: null, parent_task: null });
+  tasksToTriage: Array<Task> = [];
+  taskShortsToTriage: Array<string> = [];
   tasksForToday$ = this.taskService.list();
 
   constructor(
@@ -24,6 +25,11 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.taskService.list({ parent_project: null, parent_task: null })
+      .then(tasks => {
+        this.tasksToTriage = tasks;
+        this.taskShortsToTriage = this.tasksToTriage.map(task => task.short);
+      });
   }
 
   setStep(index: number) {
@@ -38,4 +44,6 @@ export class DashboardComponent implements OnInit {
     this.step--;
   }
 
+  updateTasksToTriage(taskShorts: Array<string>) {
+  }
 }

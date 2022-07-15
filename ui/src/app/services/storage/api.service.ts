@@ -44,7 +44,6 @@ export abstract class ApiService<T extends MongoModel> {
   }
 
   updateBatch(batch: Array<T>): Promise<Array<T>> {
-    console.log("Sending: ", batch);
     return firstValueFrom(this.httpClient.put<Array<T>>(`${this._endpoint}/batch_update`, batch));
   }
 }
