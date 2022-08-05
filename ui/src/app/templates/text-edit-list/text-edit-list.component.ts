@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
+import { ListTarget } from '@lib/interfaces/list-target';
 
 @Component({
   selector: 'text-edit-list',
@@ -12,27 +13,21 @@ export class TextEditListComponent {
 
   constructor() { }
 
-  @Input() list: Array<string> = [];
-  @Output() listChanged = new EventEmitter<Array<string>>()
+  @Input() list!: ListTarget;
 
   drop(event: CdkDragDrop<Array<string>>) {
-    moveItemInArray(this.list, event.previousIndex, event.currentIndex);
-    this.listChanged.next(this.list);
+    this.list.orderUpdate(event.previousIndex, event.currentIndex);
   }
 
   update(index: number, value: string) {
-    this.list[index] = value;
-    this.listChanged.next(this.list);
+    this.list.update(index, value);
   }
 
   remove(index: number) {
-    this.list.splice(index, 1);
-    this.listChanged.next(this.list);
+    this.list.remove(index);
   }
 
   appendEmpty() {
-      if(this.list.length <= 0 || this.list[this.list.length - 1].length > 0) {
-        this.list.push("");
-      };
-    }
-  }  
+      this.list.appendEmpty();
+  }
+}  
