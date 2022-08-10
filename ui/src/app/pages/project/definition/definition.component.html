@@ -4,9 +4,8 @@
         <mat-form-field style="width:50%" appearance="fill">
           <mat-label>Project Type</mat-label>
           <mat-select formControlName="type">
-            <mat-option>
-              -- Please Select a Type --
-            </mat-option>
+            <mat-option>-- Please Select a Type --</mat-option>
+            <mat-option *ngFor="let type of types" value="{{ type }}">{{ type }}</mat-option>
           </mat-select>
           <mat-error *ngIf="form.controls['type'].invalid">Please enter a valid project type.</mat-error>
         </mat-form-field>
@@ -15,9 +14,8 @@
         <mat-form-field style="width:50%" appearance="fill">
           <mat-label>Project Phase</mat-label>
           <mat-select formControlName="phase">
-            <mat-option>
-              -- Please Select a Phase --
-            </mat-option>
+            <mat-option>-- Please Select a Phase --</mat-option>
+            <mat-option *ngFor="let phase of phases" value="{{ phase }}">{{ phase }}</mat-option>
           </mat-select>
           <mat-error *ngIf="form.controls['phase'].invalid">Please enter a phase.</mat-error>
         </mat-form-field>

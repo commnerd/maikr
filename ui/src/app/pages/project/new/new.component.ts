@@ -30,7 +30,7 @@ export class NewComponent implements OnInit {
 
   onSubmit(project: Project) {
     this.projectService.save(project)
-      .then(() => this.router.navigate(["/definition"]));
+      .then((savedProject: Project) => this.router.navigate([savedProject._id, "definition"]));
   }
 
 }

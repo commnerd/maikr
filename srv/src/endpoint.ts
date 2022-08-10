@@ -36,10 +36,9 @@ class EndpointClass<T> {
 
     updateBatch = async (request: Request, response: Response, next: NextFunction) => {
         let updatedAry = [];
-        for(const rawModel of <Array<T>>request.body) {
-            if (rawModel && rawModel['_id']) {
-                let model = await this.model.findById(rawModel['_id']);
-                updatedAry.push(await model.overwrite(rawModel).save());
+        for await (const rawModel of Array<T>(request.body)) {
+            if (rawModel != undefined && rawModel['_id'] != undefined) {
+                updatedAry.push(await this.model.findOneAndUpdate({ _id: rawModel['_id'] }, rawModel, {new: true, upsert: true}));
             } else {
                 updatedAry.push(await (new this.model(rawModel)).save());
             }

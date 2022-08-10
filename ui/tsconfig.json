@@ -23,15 +23,12 @@
       "dom"
     ],
     "paths": {
-      "@models/*": [
-        "node_modules/@maikr/lib/models/*"
-      ],
-      "@pages/*": ["src/app/pages/*"],
-      "@services/*": [
-        "src/app/services/*"
-      ],
+      "@environments/*": ["src/environments/*"],
       "@lib/*": ["node_modules/@maikr/lib/*"],
-      "@environments/*": ["src/environments/*"]
+      "@models/*": ["node_modules/@maikr/lib/models/*"],
+      "@pages/*": ["src/app/pages/*"],
+      "@services/*": ["src/app/services/*"],
+      "@templates/*": ["src/app/templates/*"]
     }
   },
   "angularCompilerOptions": {

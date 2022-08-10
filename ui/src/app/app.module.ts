@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProjectModule } from '@pages/project/project.module';
+import { MvpModule } from '@pages/mvp/mvp.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ProjectModule } from '@pages/project/project.module';
     HttpClientModule,
     AppRoutingModule,
     ProjectModule,
+    MvpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
