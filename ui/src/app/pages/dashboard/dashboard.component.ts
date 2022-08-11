@@ -15,8 +15,7 @@ export class DashboardComponent implements OnInit {
   projectTypes = Object.values(ProjectType || {});
   projectPhases = Object.keys(ProjectPhase || {});
   projects$ = this.projectService.list();
-  tasksToTriage: Array<Task> = [];
-  taskShortsToTriage: Array<string> = [];
+  tasksToTriage$ = this.taskService.list({ project_id: undefined });
   tasksForToday$ = this.taskService.list();
 
   constructor(
@@ -25,11 +24,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.taskService.list({ parent_project: null, parent_task: null })
-      .then(tasks => {
-        this.tasksToTriage = tasks;
-        this.taskShortsToTriage = this.tasksToTriage.map(task => task.short);
-      });
   }
 
   setStep(index: number) {
@@ -44,6 +38,8 @@ export class DashboardComponent implements OnInit {
     this.step--;
   }
 
-  updateTasksToTriage(taskShorts: Array<string>) {
+  updateTasksToTriage(tasks: Array<Task>) {
+
   }
 }
+

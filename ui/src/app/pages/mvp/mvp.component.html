@@ -1,9 +1,9 @@
 <main-nav>
     <div fxFlex fxLayoutAlign="flex-end center">
         <a href="/dashboard" mat-button>Next</a>
-     </div>
+    </div>
 </main-nav>
 
 <centered-content>
-    <text-edit-list [list]="taskShorts" (listChanged)="update($event)"></text-edit-list>
+    <text-edit-list [list]="tasks$ | async" key="short" (listChanged)="update($event)"></text-edit-list>
 </centered-content>

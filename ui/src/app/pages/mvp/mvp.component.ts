@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Observable, map, mergeMap, tap } from 'rxjs';
 
 import { TaskService } from '@services/task.service';
 import { Task } from '@maikr/lib/models/task';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-mvp',
@@ -11,9 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MvpComponent implements OnInit {
 
-  projectId!: string; 
-  tasks: Array<Task> = [];
-  taskShorts: Array<string> = [];
+  tasks$!: Observable<Array<Task>>;
+  projectId!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,34 +22,16 @@ export class MvpComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initProjectIdFromPath();
-    this.taskService.list()
+    this.tasks$ = this.route.params.pipe(
+      map(params => params['projectId']),
+      tap(projectId => this.projectId = projectId),
+      mergeMap(projectId => this.taskService.list({ parent_project: this.projectId }))
+    )
   }
 
-  update(taskShorts: Array<string>) {
-    let tasks = this.tasks.map((task, index) => {
-      task.parent_project = this.projectId;
-      task.short = taskShorts[index];
-      return task;
-    });
-    this.taskService.updateBatch(tasks).then(tasks => {
-      this.tasks = tasks;
-    });
-  }
-
-  initProjectIdFromPath() {
-    let subscription = this.route.params.subscribe(rs => {
-      this.projectId = rs['projectId'];
-      setTimeout(() => {
-        subscription.unsubscribe();
-      }, 0);
-    });
-  }
-
-  initTasks(projectId: string) {
-    this.taskService.list({ parent_project: projectId }).then(tasks => {
-      this.tasks = tasks;
-      this.taskShorts = this.tasks.map(task => task.short);
-    });
+  update(tasks: Array<Task>) {
+    console.log(tasks);
+    tasks.forEach(task => task.parent_project = this.projectId);
+    this.taskService.updateBatch(tasks);
   }
 }
