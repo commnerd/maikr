@@ -28,6 +28,7 @@ export class TextEditListComponent<T> implements OnInit {
       this.list = [];
     }
     this._listTarget = new ListWrapper(this.list, this.key);
+    this._listTarget.appendEmpty();
     this.listChanged.emit(this.list);
   }
 
