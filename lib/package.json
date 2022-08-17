@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/commnerd/maikr-lib/issues"
   },
-  "homepage": "https://github.com/commnerd/maikr-lib#readme"
+  "homepage": "https://github.com/commnerd/maikr-lib#readme",
+  "dependencies": {
+    "brain.js": "^2.0.0-beta.15"
+  }
 }
