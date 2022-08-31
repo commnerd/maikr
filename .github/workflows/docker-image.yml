@@ -21,7 +21,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Extract metadata (tags, labels) for UI on DockerHub
-      id: meta
+      id: meta-ui
       uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       with:
         images: commnerd/maikr-ui:2.0-latest
@@ -31,11 +31,11 @@ jobs:
       with:
         context: tools/docker/ui
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ steps.meta-ui.outputs.tags }}
+        labels: ${{ steps.meta-ui.outputs.labels }}
         
     - name: Extract metadata (tags, labels) for Server on DockerHub
-      id: meta
+      id: meta-srv
       uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       with:
         images: commnerd/maikr-srv:2.0-latest
@@ -45,5 +45,5 @@ jobs:
       with:
         context: tools/docker/srv
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ steps.meta-srv.outputs.tags }}
+        labels: ${{ steps.meta-srv.outputs.labels }}
