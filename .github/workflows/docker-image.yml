@@ -2,48 +2,51 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "v0.2.x" ]
+    branches: ["v0.2.x"]
 
 jobs:
-
   push_to_registry:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the repo
-      uses: actions/checkout@v3
-      
-    - name: Log in to Docker Hub
-      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Check out the repo
+        uses: actions/checkout@v3
 
-    - name: Extract metadata (tags, labels) for UI on DockerHub
-      id: meta-ui
-      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-      with:
-        images: commnerd/maikr-ui
-     
-    - name: Build and push UI Docker image
-      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-      with:
-        context: docker/ui
-        push: true
-        tags: ${{ steps.meta-ui.outputs.tags }}
-        labels: ${{ steps.meta-ui.outputs.labels }}
-        
-    - name: Extract metadata (tags, labels) for Server on DockerHub
-      id: meta-srv
-      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-      with:
-        images: commnerd/maikr-srv
-     
-    - name: Build and push UI Docker image
-      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-      with:
-        context: docker/srv
-        push: true
-        tags: ${{ steps.meta-srv.outputs.tags }}
-        labels: ${{ steps.meta-srv.outputs.labels }}
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract metadata (tags, labels) for UI on DockerHub
+        id: meta-ui
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: commnerd/maikr-ui
+
+      - name: Build and push UI Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: docker/ui
+          platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8
+          push: true
+          tags: ${{ steps.meta-ui.outputs.tags }}
+          labels: ${{ steps.meta-ui.outputs.labels }}
+
+      - name: Extract metadata (tags, labels) for Server on DockerHub
+        id: meta-srv
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: commnerd/maikr-srv
+
+      - name: Build and push UI Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: docker/srv
+          platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8
+          push: true
+          tags: ${{ steps.meta-srv.outputs.tags }}
+          labels: ${{ steps.meta-srv.outputs.labels }}
