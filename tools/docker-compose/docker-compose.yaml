@@ -1,13 +1,13 @@
 services:
   ui:
-    build: tools/docker/ui
+    build: ../docker/ui
     volumes:
       - ./ui:/srv/ui:z
       - ./lib:/srv/lib:z
     ports:
       - ${UI_PORT:-4200}:4200
   srv:
-    build: tools/docker/srv
+    build: ../docker/srv
     volumes:
       - ./srv:/srv/srv:z
       - ./lib:/srv/lib:z
