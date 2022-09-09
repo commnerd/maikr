@@ -1,7 +1,7 @@
 trigger_mode(TRIGGER_MODE_MANUAL)
 
 def dc():
-    docker_compose("../docker-compose/docker-compose.yaml")
+    docker_compose("../../docker-compose.yaml")
     for container in ['mongodb', 'mongo-express', 'srv', 'ui']:
         dc_resource(
             container,
@@ -11,14 +11,13 @@ def dc():
 dc()
 
 def helm_chart():
-   k8s_yaml(helm('../helm-chart', name='maikr', set=['ingress.enabled=true']))
-   for container in ['maikr', 'maikr-mongo-express', 'maikr-mongo', 'maikr-srv', 'maikr-ui']:
+    k8s_yaml(helm('../helm-chart', name='maikr', set=['ingress.enabled=true']))
+    for container in ['maikr', 'maikr-mongodb']:
         k8s_resource(
             container,
-            auto_init=False if container == 'mongo-express' else True,
-            labels = ['docker-compose']
+            labels = ['kubernetes']
         )
-# helm_chart()
+helm_chart()
 
 if (os.path.exists(os.getenv('HOME') + '/Workspace/local_tilt/Tiltfile')):
     include(os.getenv('HOME') + '/Workspace/local_tilt/Tiltfile')
