@@ -17,7 +17,7 @@ def helm_chart():
             container,
             labels = ['kubernetes']
         )
-helm_chart()
+# helm_chart()
 
 if (os.path.exists(os.getenv('HOME') + '/Workspace/local_tilt/Tiltfile')):
     include(os.getenv('HOME') + '/Workspace/local_tilt/Tiltfile')
