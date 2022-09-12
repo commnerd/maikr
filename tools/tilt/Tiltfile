@@ -12,7 +12,7 @@ dc()
 
 def helm_chart():
     k8s_yaml(helm('../helm-chart', name='maikr', set=['ingress.enabled=true']))
-    for container in ['maikr', 'maikr-mongo']:
+    for container in ['maikr', 'maikr-mongo', 'maikr-ui', 'maikr-srv']:
         k8s_resource(
             container,
             labels = ['kubernetes']

@@ -1,11 +1,11 @@
-# Default values for mongo.
+# Default values for ui.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: mongo
+  repository: commnerd/maikr-ui
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -40,7 +40,7 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 27017
+  port: 4200
 
 ingress:
   enabled: false
@@ -49,16 +49,16 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: db.maikr.local
+    - host: ui.maikr.local
       paths:
         - path: /
           backend:
-            serviceName: db.maikr.local
-            servicePort: 27017
+            serviceName: ui.maikr.local
+            servicePort: 4200
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
-  #      - db.maikr.local
+  #      - ui.maikr.local
 
 resources:
   {}
