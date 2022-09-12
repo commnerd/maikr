@@ -12,12 +12,12 @@ dc()
 
 def helm_chart():
     k8s_yaml(helm('../helm-chart', name='maikr', set=['ingress.enabled=true']))
-    for container in ['maikr', 'maikr-mongodb']:
+    for container in ['maikr', 'maikr-mongo']:
         k8s_resource(
             container,
             labels = ['kubernetes']
         )
-# helm_chart()
+helm_chart()
 
 if (os.path.exists(os.getenv('HOME') + '/Workspace/local_tilt/Tiltfile')):
     include(os.getenv('HOME') + '/Workspace/local_tilt/Tiltfile')
