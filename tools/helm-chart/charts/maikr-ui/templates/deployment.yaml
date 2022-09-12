@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "maikr.fullname" . }}
+  name: {{ include "maikr-ui.fullname" . }}
   labels:
-    {{- include "maikr.labels" . | nindent 4 }}
+    {{- include "maikr-ui.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "maikr.selectorLabels" . | nindent 6 }}
+      {{- include "maikr-ui.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "maikr.selectorLabels" . | nindent 8 }}
+        {{- include "maikr-ui.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "maikr.serviceAccountName" . }}
+      serviceAccountName: {{ include "maikr-ui.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 4200
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -47,17 +47,6 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          volumeMounts:
-            - name: default-conf
-              mountPath: "/etc/nginx/conf.d"
-              readOnly: true
-      volumes:
-        - name: default-conf
-          configMap:
-            name: default-conf
-            items:
-              - key:  "default.conf"
-                path: "default.conf"
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
