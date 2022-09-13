@@ -8,8 +8,8 @@ metadata:
     "helm.sh/hook": test
 spec:
   containers:
-    - name: wget
-      image: busybox
-      command: ['wget']
+    - name: conn-tester
+      image: mongoclient/mongoclient:{{ .Chart.AppVersion }}
+      command: ['mongo']
       args: ['{{ include "mongo.fullname" . }}:{{ .Values.service.port }}']
   restartPolicy: Never
