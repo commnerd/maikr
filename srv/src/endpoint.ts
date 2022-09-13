@@ -38,7 +38,7 @@ class EndpointClass<T> {
         let updatedAry = [];
         for await (const rawModel of Array<T>(request.body)) {
             if (rawModel != undefined && rawModel['_id'] != undefined) {
-                updatedAry.push(await this.model.findOneAndUpdate({ _id: rawModel['_id'] }, rawModel, {new: true, upsert: true}));
+                updatedAry.push(await this.model.findOneAndUpdate({ _id: rawModel['_id'] }, rawModel, { new: true, upsert: true }));
             } else {
                 updatedAry.push(await (new this.model(rawModel)).save());
             }
