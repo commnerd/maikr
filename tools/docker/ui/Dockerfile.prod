@@ -3,9 +3,7 @@ FROM ubuntu AS builder
 RUN apt update && apt install -y git && \
     git clone https://github.com/commnerd/maikr.git /tmp/maikr
 
-FROM node
-
-EXPOSE 4200
+FROM node AS builder2
 
 RUN bash -c 'npm install -g npm@8.10.0 @angular/cli'
 
@@ -13,4 +11,8 @@ COPY --from=builder /tmp/maikr/ui /srv/ui
 COPY --from=builder /tmp/maikr/lib /srv/lib
 WORKDIR /srv/ui
 
-ENTRYPOINT [ "bash", "-c", "npm install && ng serve --port 4200" ]
+RUN ng build
+
+FROM nginx
+
+COPY --from=builder2 /srv/ui/dist/maikr/* /usr/share/nginx/html
