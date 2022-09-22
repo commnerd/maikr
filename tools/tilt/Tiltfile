@@ -18,7 +18,7 @@ def dc():
             argv=[
                 '/bin/bash',
                 '-c',
-                'cd ../../tools/docker/{container} && docker build -t commnerd/maikr-{container} -f Dockerfile.prod .'.format(container=container)
+                'cd ../.. && docker build -t commnerd/maikr-{container} -f tools/docker/{container}/Dockerfile.prod .'.format(container=container)
             ]
         )
 dc()
