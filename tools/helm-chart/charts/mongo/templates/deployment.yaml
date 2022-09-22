@@ -39,7 +39,7 @@ spec:
             - name:  ME_CONFIG_MONGODB_ADMINPASSWORD
               value: pass
             - name:  ME_CONFIG_MONGODB_URL
-              value: "mongodb://user:pass@maikr-mongo:27017/admin"
+              value: "mongodb://user:pass@maikr-mongo:27017/"
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
