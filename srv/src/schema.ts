@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-const user = process.env.MONGO_USER;
-const pass = process.env.MONGO_PASS;
-const url = process.env.MONGO_URL;
-const table = process.env.MONGO_TABLE;
+const db_user = process.env.MONGO_USER || 'user';
+const db_pass = process.env.MONGO_PASS || 'pass';
+const db_url = process.env.MONGO_URL || 'localhost';
+const db_table = process.env.MONGO_TABLE || 'admin';
 
 mongoose.set('debug', true);
-mongoose.connect(`mongodb://${user}:${pass}@${url}/${table}`, {}, (err) => {
+mongoose.connect(`mongodb://${db_user}:${db_pass}@${db_url}/${db_table}`, {}, (err) => {
   console.log(err);
 });
 
