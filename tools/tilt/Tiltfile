@@ -1,3 +1,4 @@
+load('ext://uibutton', 'cmd_button', 'location', 'text_input', 'bool_input')
 trigger_mode(TRIGGER_MODE_MANUAL)
 
 def dc():
@@ -7,6 +8,18 @@ def dc():
             container,
             auto_init=False if container == 'mongo-express' else True,
             labels = ['docker-compose']
+        )
+
+    for container in ['srv', 'ui']:
+        cmd_button(
+            name='build-prod-container-{container}'.format(container=container),
+            resource=container,
+            text='Build Prod Container',
+            argv=[
+                '/bin/bash',
+                '-c',
+                'cd ../../tools/docker/{container} && docker build -t commnerd/maikr-{container} -f Dockerfile.prod .'.format(container=container)
+            ]
         )
 dc()
 
