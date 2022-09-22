@@ -1,7 +1,7 @@
-FROM node
+FROM node:16.10 as builder
 
 COPY lib /app/lib
-COPY ui /app/srv
+COPY srv /app/srv
 
 ENV MONGO_USER  user
 ENV MONGO_PASS  pass
@@ -10,8 +10,7 @@ ENV MONGO_TABLE admin
 
 EXPOSE 3000
 
-COPY --from=builder /tmp/maikr/srv /srv/srv
-COPY --from=builder /tmp/maikr/lib /srv/lib
-WORKDIR /srv/srv
+WORKDIR /app/srv
+RUN npm install
 
 ENTRYPOINT [ "bash", "-c", "npm install && npm run serve" ]
