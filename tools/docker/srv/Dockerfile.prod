@@ -1,9 +1,7 @@
-FROM ubuntu AS builder
-
-RUN apt update && apt install -y git && \
-    git clone https://github.com/commnerd/maikr.git /tmp/maikr
-
 FROM node
+
+COPY lib /app/lib
+COPY ui /app/srv
 
 ENV MONGO_USER  user
 ENV MONGO_PASS  pass
