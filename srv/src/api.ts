@@ -7,7 +7,14 @@ import { Endpoint } from './endpoint';
 import mongoose from 'mongoose';
 
 const app = express();
-const port = 3000;
+
+const db_user = process.env.MONGO_USER || 'user';
+const db_pass = process.env.MONGO_PASS || 'pass';
+const db_url = process.env.MONGO_URL || 'localhost';
+const db_port = process.env.MONGO_PORT || '27017';
+const db_table = process.env.MONGO_TABLE || 'admin';
+
+const port = process.env.API_PORT || 3000;
 
 app.use(express.json());
 app.use(function (req, res, next) {
@@ -25,6 +32,8 @@ app.get('/health-check', async (request: Request, response: Response, next: Next
   response.status(200).json({ 'status': 'healthy' });
 });
 
+mongoose.connect(`mongodb://${db_url}:${db_port}/${db_table};`)
+
 app.listen(port, () => {
-  console.log(`Running on port ${port}.`);
+  console.log(`Running at mongodb://localhost:${port}.`);
 });
