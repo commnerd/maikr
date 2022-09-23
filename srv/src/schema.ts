@@ -1,3 +1,6 @@
+import { Project as ProjectInterface } from '@maikr/lib/models/project';
+import { Task as TaskInterface } from '@maikr/lib/models/task';
+import { ListItem as ListItemInterface } from '@maikr/lib/models/list-item';
 import mongoose from 'mongoose';
 
 const db_user = process.env.MONGO_USER || 'user';
@@ -10,14 +13,14 @@ mongoose.connect(`mongodb://${db_user}:${db_pass}@${db_url}/${db_table}`, {}, (e
   console.log(err);
 });
 
-export const Project = mongoose.model('Project', new mongoose.Schema({
+export const Project = mongoose.model<ProjectInterface>('Project', new mongoose.Schema({
   name: mongoose.SchemaTypes.String,
   description: mongoose.SchemaTypes.String,
   type: mongoose.SchemaTypes.String,
   phase: mongoose.SchemaTypes.String,
 }));
 
-export const Task = mongoose.model('Task', new mongoose.Schema({
+export const Task = mongoose.model<TaskInterface>('Task', new mongoose.Schema({
   parent_project: mongoose.SchemaTypes.ObjectId,
   parent_task: mongoose.SchemaTypes.ObjectId,
   short: mongoose.SchemaTypes.String,
@@ -44,7 +47,7 @@ export const LogListItem = mongoose.model('LogListItem', new mongoose.Schema({
   list_item: mongoose.SchemaTypes.ObjectId,
 }));
 
-export const ListItem = mongoose.model('ListItem', new mongoose.Schema({
+export const ListItem = mongoose.model<ListItemInterface>('ListItem', new mongoose.Schema({
   entry: mongoose.SchemaTypes.String,
 }));
 

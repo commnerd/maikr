@@ -18,9 +18,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-Endpoint<ListItemInterface>(app, ListItem as mongoose.Model<ListItemInterface>, '/list-items');
-Endpoint<ProjectInterface>(app, Project as mongoose.Model<ProjectInterface>, '/projects');
-Endpoint<TaskInterface>(app, Task as mongoose.Model<TaskInterface>, '/tasks');
+Endpoint<ListItemInterface>(app, ListItem, '/list-items');
+Endpoint<ProjectInterface>(app, Project, '/projects');
+Endpoint<TaskInterface>(app, Task, '/tasks');
 
 app.get('/health-check', async (request: Request, response: Response, next: NextFunction) => {
   response.status(200).json({ 'status': 'healthy' });
