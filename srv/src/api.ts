@@ -4,7 +4,6 @@ import { Task as TaskInterface } from '@maikr/lib/models/task';
 import { ListItem as ListItemInterface } from '@maikr/lib/models/list-item';
 import { ListItem, Project, Task } from './schema';
 import { Endpoint } from './endpoint';
-import mongoose from 'mongoose';
 
 const app = express();
 const api_url = process.env.API_URL || 'localhost';

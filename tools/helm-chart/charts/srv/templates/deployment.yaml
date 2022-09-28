@@ -34,6 +34,10 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            - name: API_URL
+              value: localhost
+            - name: URL_PORT
+              value: 3000
             - name: MONGO_USER
               value: user
             - name: MONGO_PASS
@@ -48,11 +52,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /health-check
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /health-check
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
