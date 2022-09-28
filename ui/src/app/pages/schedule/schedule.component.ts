@@ -12,11 +12,9 @@ import { TaskService } from '@services/task.service';
 export class ScheduleComponent implements OnInit {
 
   step = 0;
-  projectTypes = Object.values(ProjectType || {});
-  projectPhases = Object.keys(ProjectPhase || {});
-  projects$ = this.projectService.list();
-  tasksToTriage$ = this.taskService.list({ parent_project: null, parent_task: null });
-  tasksForToday$ = this.taskService.list();
+  dailyTasks$ = this.taskService.list();
+  monthlyTasks$ = this.taskService.list();
+  yearlyTasks$ = this.taskService.list();
 
   constructor(
     private projectService: ProjectService,
