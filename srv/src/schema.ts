@@ -35,20 +35,17 @@ export const List = mongoose.model<ListInterface>('List', new mongoose.Schema({
   name: mongoose.SchemaTypes.String,
 }));
 
-export const ListListItem = mongoose.model<ListItemInterface>('ListListItem', new mongoose.Schema({
+export const ListItem = mongoose.model<ListItemInterface>('ListItem', new mongoose.Schema({
   list: mongoose.SchemaTypes.ObjectId,
+  value: mongoose.SchemaTypes.String,
 }));
 
-export const Log = mongoose.model('Log', new mongoose.Schema({
+export const Log = mongoose.model<ListInterface>('Log', new mongoose.Schema({
   name: mongoose.SchemaTypes.String,
 }));
 
-export const LogListItem = mongoose.model<ListItemInterface>('LogListItem', new mongoose.Schema({
+export const LogItem = mongoose.model<ListItemInterface>('LogItem', new mongoose.Schema({
   list: mongoose.SchemaTypes.ObjectId,
-}));
-
-export const ListItem = mongoose.model<ListItemInterface>('ListItem', new mongoose.Schema({
-  entry: mongoose.SchemaTypes.String,
 }));
 
 export const Word = mongoose.model('Word', new mongoose.Schema({
