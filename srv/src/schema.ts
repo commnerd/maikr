@@ -1,6 +1,8 @@
 import { Project as ProjectInterface } from '@maikr/lib/models/project';
 import { Task as TaskInterface } from '@maikr/lib/models/task';
 import { ListItem as ListItemInterface } from '@maikr/lib/models/list-item';
+import { List as ListInterface } from '@maikr/lib/models/list';
+
 import mongoose from 'mongoose';
 
 const db_user = process.env.MONGO_USER || 'user';
@@ -29,22 +31,20 @@ export const Task = mongoose.model<TaskInterface>('Task', new mongoose.Schema({
   updated_at: mongoose.SchemaTypes.Date,
 }));
 
-export const List = mongoose.model('List', new mongoose.Schema({
+export const List = mongoose.model<ListInterface>('List', new mongoose.Schema({
   name: mongoose.SchemaTypes.String,
 }));
 
-export const ListListItem = mongoose.model('ListListItem', new mongoose.Schema({
+export const ListListItem = mongoose.model<ListItemInterface>('ListListItem', new mongoose.Schema({
   list: mongoose.SchemaTypes.ObjectId,
-  list_item: mongoose.SchemaTypes.ObjectId,
 }));
 
 export const Log = mongoose.model('Log', new mongoose.Schema({
   name: mongoose.SchemaTypes.String,
 }));
 
-export const LogListItem = mongoose.model('LogListItem', new mongoose.Schema({
-  log: mongoose.SchemaTypes.ObjectId,
-  list_item: mongoose.SchemaTypes.ObjectId,
+export const LogListItem = mongoose.model<ListItemInterface>('LogListItem', new mongoose.Schema({
+  list: mongoose.SchemaTypes.ObjectId,
 }));
 
 export const ListItem = mongoose.model<ListItemInterface>('ListItem', new mongoose.Schema({

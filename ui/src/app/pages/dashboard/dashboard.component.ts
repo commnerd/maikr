@@ -16,11 +16,11 @@ export class DashboardComponent implements OnInit {
   projectPhases = Object.keys(ProjectPhase || {});
   projects$ = this.projectService.list();
   tasksToTriage$ = this.taskService.list({ parent_project: null, parent_task: null });
-  tasksForToday$ = this.taskService.list();
+  tasksForToday$ = this.taskService.list({ parent_project: { $ne: null }, parent_task: { $ne: null } });
 
   constructor(
     private projectService: ProjectService,
-    private taskService: TaskService
+    private taskService: TaskService,
   ) { }
 
   ngOnInit(): void {
