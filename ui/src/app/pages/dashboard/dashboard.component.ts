@@ -26,6 +26,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addProject(): void {
+    // TODO: Navigate to project addition path
+  }
+  addTask(): void {
+    // TODO: Navigate to task addition path
+  }
+
   setStep(index: number) {
     this.step = index;
   }
