@@ -15,7 +15,11 @@ class EndpointClass<T> {
     }
 
     list = async (request: Request, response: Response, next: NextFunction) => {
-        response.status(200).json(await this.model.find({}));
+        let filter = {};
+        if (request.query['filter']) {
+            filter = JSON.parse(request.query['filter'] as string);
+        }
+        response.status(200).json(await this.model.find(filter));
     }
 
     get = async (request: Request, response: Response, next: NextFunction) => {

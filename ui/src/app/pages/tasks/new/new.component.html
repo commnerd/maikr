@@ -1,0 +1,22 @@
+<main-nav></main-nav>
+<div fxLayout="column" fxLayoutAlign="center">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <div fxLayoutAlign="center">
+      <mat-form-field style="width:50%" appearance="fill">
+        <mat-label>Task</mat-label>
+        <input formControlName="short" matInput>
+        <mat-error *ngIf="form.controls['short'].invalid">Please enter a valid short name.</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center" style="margin-top:10px">
+      <mat-form-field style="width:50%" appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea formControlName="long" matInput></textarea>
+        <mat-error *ngIf="form.controls['long'].invalid">Please enter a description</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center" style="margin-top:20px">
+      <button [disabled]="!form.valid || formSubmitted" type="submit" mat-raised-button color="primary">Submit</button>
+    </div>
+  </form>
+</div>

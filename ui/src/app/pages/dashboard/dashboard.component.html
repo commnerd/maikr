@@ -73,7 +73,9 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <text-edit-list [list]="tasksToTriage$ | async" key="short"></text-edit-list>
+      <ol>
+        <li *ngFor="let task of tasksToTriage$ | async">{{ task.short }}</li>
+      </ol>
 
       <mat-action-row>
         <button mat-button color="primary" (click)="addTask()">Add Task</button>

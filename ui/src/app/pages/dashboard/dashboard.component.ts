@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Phase as ProjectPhase, Type as ProjectType } from '@maikr/lib/models/project';
 
 import { ProjectService } from '@services/project.service';
@@ -15,22 +16,24 @@ export class DashboardComponent implements OnInit {
   projectTypes = Object.values(ProjectType || {});
   projectPhases = Object.keys(ProjectPhase || {});
   projects$ = this.projectService.list();
-  tasksToTriage$ = this.taskService.list({ parent_project: null, parent_task: null });
-  tasksForToday$ = this.taskService.list({ parent_project: { $ne: null }, parent_task: { $ne: null } });
+  tasksToTriage$ = this.taskService.list();
+  tasksForToday$ = this.taskService.list();
 
   constructor(
     private projectService: ProjectService,
     private taskService: TaskService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
   }
 
   addProject(): void {
-    // TODO: Navigate to project addition path
+    this.router.navigate(['/', 'projects', 'new'])
   }
+
   addTask(): void {
-    // TODO: Navigate to task addition path
+    this.router.navigate(['/', 'tasks', 'new'])
   }
 
   setStep(index: number) {
