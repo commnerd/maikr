@@ -12,9 +12,10 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <ol>
-        <li *ngFor="let task of tasksForToday$ | async">{{ task.short }}</li>
-      </ol>
+      <centered-content>
+        <text-edit-list key="short" [list]="tasksForToday$ | async" (listChanged)="updateTasksForToday($event)">
+        </text-edit-list>
+      </centered-content>
 
       <mat-action-row>
         <button mat-button color="primary" (click)="nextStep()">Next</button>

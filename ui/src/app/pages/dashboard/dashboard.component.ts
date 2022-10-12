@@ -28,6 +28,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  updateTasksForToday(event: any) {
+    console.log(event);
+  }
+
   addProject(): void {
     this.router.navigate(['/', 'projects', 'new'])
   }
