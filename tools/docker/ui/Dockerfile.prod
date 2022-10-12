@@ -2,12 +2,16 @@
 FROM node:16.10 as build-stage
 ADD . /srv/
 RUN ls /srv
+RUN cd /srv/ui/mydraft-cc && npm install
+RUN cd /srv/ui/mydraft-cc && npm run build
 RUN cd /srv/ui && npm install
 ARG configuration=production
 RUN cd /srv/ui && npm run build -- --output-path=./dist/out --configuration $configuration
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
 FROM nginx:1.15
+#Copy mydraft-cc to base_dir
+COPY --from=build-stage /srv/ui/mydraft-cc/build/ /usr/share/nginx/html/mydraft-cc
 #Copy ci-dashboard-dist
 COPY --from=build-stage /srv/ui/dist/out/ /usr/share/nginx/html
 #Copy default nginx configuration
