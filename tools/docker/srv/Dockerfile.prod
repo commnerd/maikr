@@ -1,0 +1,16 @@
+FROM node:16.10 as builder
+
+COPY ./lib /app/lib
+COPY ./srv /app/srv
+
+ENV MONGO_USER  user
+ENV MONGO_PASS  pass
+ENV MONGO_URL   mongodb
+ENV MONGO_TABLE admin
+
+EXPOSE 3000
+
+WORKDIR /app/srv
+RUN npm install
+
+ENTRYPOINT [ "bash", "-c", "npm install && npm run serve" ]
