@@ -1,15 +1,7 @@
 import { RunContext as RunContextEnum } from "../../enums/run_context";
-import { RunContext as RunContextInterface } from "../../interfaces/run_context";
+import { RunContext } from "./run_context";
 
-export class LocalRunContext implements RunContextInterface {
-
-    private label: "Local";
-
-    getSlug(): RunContextEnum {
-        return RunContextEnum.LOCAL;
-    }
-
-    getLabel(): string {
-        return this.label;
-    }
+export class LocalRunContext extends RunContext {
+    protected label: string = "Local";
+    protected slug: RunContextEnum = RunContextEnum.LOCAL;
 }

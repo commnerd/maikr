@@ -1,21 +1,12 @@
-import { Paged } from './Paged';
-import { Model } from './Model';
-import { Id } from './Id';
+import { Paged } from './paged';
+import { Model } from './model';
+import { Id } from './id';
+import { RunContext } from './run_context';
 
 /**
  * The interface for interacting with all storage medium
  */
-export interface Storage {
-    /**
-     * Retrieve the slug for the storage medium
-     */
-    getSlug(): string;
-
-    /**
-     * Get the displayable label for the storage medium 
-     */
-    getLabel(): string;
-
+export interface Storage extends RunContext {
     /**
      * List models with provided optional filters
      */
