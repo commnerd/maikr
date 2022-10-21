@@ -27,7 +27,6 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS:-pass}
   mongo-express:
     image: mongo-express
-    restart: always
     ports:
       - ${ME_PORT:-8081}:8081
     environment:
@@ -36,3 +35,9 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USER:-user}:${MONGO_PASS:-pass}@${MONGO_URL:-mongodb}:27017/
     depends_on:
       - mongodb
+  jupyter-notebooks:
+    build: tools/docker/jupyter-notebooks
+    ports:
+      - ${JUPYTER_PORT:-8888}:8888
+    volumes:
+      - ./tools/jupyter-notebooks:/home/jovyan/work:rw
