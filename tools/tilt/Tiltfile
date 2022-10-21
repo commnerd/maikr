@@ -3,10 +3,10 @@ trigger_mode(TRIGGER_MODE_MANUAL)
 
 def dc():
     docker_compose("../../docker-compose.yaml")
-    for container in ['mongodb', 'mongo-express', 'srv', 'ui']:
+    for container in ['mongodb', 'mongo-express', 'jupyter-notebooks', 'srv', 'ui']:
         dc_resource(
             container,
-            auto_init=False if container == 'mongo-express' else True,
+            auto_init=False if container == 'mongo-express' or container == 'jupyter-notebooks' else True,
             labels = ['docker-compose']
         )
 
