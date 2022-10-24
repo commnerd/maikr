@@ -1,32 +1,8 @@
-load('ext://uibutton', 'cmd_button', 'location', 'text_input', 'bool_input')
-trigger_mode(TRIGGER_MODE_MANUAL)
-
-def dc():
-    docker_compose("../../docker-compose.yaml")
-    for container in ['mongodb', 'mongo-express', 'jupyter-notebooks', 'srv', 'ui']:
-        dc_resource(
-            container,
-            auto_init=False if container == 'mongo-express' or container == 'jupyter-notebooks' else True,
-            labels = ['docker-compose']
-        )
-
-    for container in ['srv', 'ui']:
-        cmd_button(
-            name='build-prod-container-{container}'.format(container=container),
-            resource=container,
-            text='Build Prod Container',
-            argv=[
-                '/bin/bash',
-                '-c',
-                'cd ../.. && docker build -t commnerd/maikr-{container} -f tools/docker/{container}/Dockerfile.prod .'.format(container=container)
-            ]
-        )
-dc()
-
-def helm_chart():
-    k8s_yaml(helm('../helm-chart', name='maikr', set=['ingress.enabled=true']))
-    for container in ['maikr', 'maikr-mongo', 'maikr-ui', 'maikr-srv']:
-        k8s_resource(
-            container,
-            labels = ['kubernetes']
-        )
+local_resource(
+    name='ui',
+    serve_cmd='cd ../../ui/web && npm install && ng serve',
+    allow_parallel=True,
+    links = [
+        link('http://localhost:4200', 'UI')
+    ]
+)
