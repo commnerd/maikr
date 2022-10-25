@@ -1,8 +1,8 @@
 import { ListItem } from './list_item';
-import { Paged } from './paged';
 
-type ItemSet = Array<ListItem> | Paged<ListItem>;
-
-export interface List {
-    items(): ItemSet;
+export interface List extends Iterable<ListItem> {
+    items(): Iterable<ListItem>;
+    remove(index: number): List;
+    length(): number;
+    moveItems(i1: number, i2: number, alg?: Function): List;
 }

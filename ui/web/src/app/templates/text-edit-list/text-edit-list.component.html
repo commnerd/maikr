@@ -1,6 +1,8 @@
 <div cdkDropList (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let str of strList; index as strIndex" cdkDrag>
-        <text-edit [input]="str" (inputChange)="update(strIndex, $event)"><ng-content></ng-content></text-edit>
-        <button *ngIf="str.length > 0" (push)="remove(strIndex)">X</button>
+    <div *ngFor="let item of (list$ | async).toArray(); index as strIndex" cdkDrag>
+        <text-edit [input]="item.short()" (inputChange)="update(strIndex, $event)">
+            <ng-content></ng-content>
+        </text-edit>
+        <button *ngIf="item.short().length > 0" (push)="remove(strIndex)">X</button>
     </div>
 </div>
