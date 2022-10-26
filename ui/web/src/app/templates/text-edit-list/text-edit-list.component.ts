@@ -1,9 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter, NgIterable } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
-import { Observable } from 'rxjs';
-
-import { ItemSet, List } from '@maikr/lib/interfaces/list';
+import { List } from '@maikr/lib/interfaces/list';
+import { ListItem } from '@maikr/lib/interfaces/list_item';
 
 @Component({
   selector: 'text-edit-list',
@@ -12,19 +11,18 @@ import { ItemSet, List } from '@maikr/lib/interfaces/list';
 })
 export class TextEditListComponent implements OnInit {
 
-  @Input() list$!: Observable<List>;
-  @Input() key!: string;
+  @Input() list!: List;
 
   @Output() listChanged = new EventEmitter<List>()
 
   constructor() { }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+
   }
 
-  drop(event: CdkDragDrop<ItemSet>) {
-    // event.moveItems(event.previousIndex, event.currentIndex, moveItemInArray);
+  drop(event: CdkDragDrop<NgIterable<ListItem>>) {
+    this.list.moveItems(event.previousIndex, event.currentIndex, moveItemInArray);
     this.listChanged.next(this.list);
   }
 

@@ -3,8 +3,29 @@ import { NgIterable } from "@angular/core";
 import { List as MaikrList, } from '@maikr/lib/interfaces/list';
 import { ListItem } from '@maikr/lib/interfaces/list_item';
 
-export class List implements MaikrList {
-    private _items!: NgIterable<ListItem>;
+class ListIterator implements Iterator<ListItem> {
+    private index = 0;
+    private array: Array<ListItem> = [];
+
+    constructor({ items }: { items: Iterable<ListItem>; }) {
+        this.array = Array.from(items);
+    }
+
+    next(...args: [] | [undefined]): IteratorResult<ListItem, any> {
+        return {
+            done: this.array[this.index] == undefined,
+            value: this.array[this.index],
+        };
+    }
+}
+
+export class List implements MaikrList, Iterable<ListItem> {
+    private _items: Array<ListItem> = [];
+    private _iteratorIndex: number = 0;
+
+    constructor() {
+        this._items = [];
+    }
 
     toString(): string {
         return this._items.toString();
@@ -14,17 +35,20 @@ export class List implements MaikrList {
         return "";
     }
 
-    *[Symbol.iterator](): Iterator<ListItem, any, undefined> {
-        for (let i of this._items) {
-            yield i;
-        }
+    [Symbol.iterator](): Iterator<ListItem, any, undefined> {
+        return new ListIterator({ items: this._items });
     }
 
     items(): NgIterable<ListItem> {
         return this._items;
     }
 
-    remove(index: number): MaikrList {
+    add(item: ListItem): void {
+        this._items.push(item);
+    }
+
+    remove(index: number): List {
+        this._items.splice(index, 1);
         return this;
     }
 

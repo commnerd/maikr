@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { List } from '@maikr/lib/interfaces/list';
 
+import { List as ListModel } from 'src/app/models/list';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -8,7 +10,7 @@ import { List } from '@maikr/lib/interfaces/list';
 })
 export class ListComponent implements OnInit {
 
-  list!: List;
+  list: List = new ListModel();
 
   constructor() { }
 
