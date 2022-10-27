@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { List } from '@maikr/lib/interfaces/list';
 
-import { List as ListModel } from 'src/app/models/list';
+import { List as ListModel } from '../../models/list';
 
 @Component({
   selector: 'app-list',

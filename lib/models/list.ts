@@ -1,27 +1,52 @@
-import { ItemSet, List as ListInterface } from '../interfaces/list';
+import { List as ListInterface } from '../interfaces/list';
+import { ListItem } from '../interfaces/list_item';
+
+class ListIterator implements Iterator<ListItem> {
+    private index = 0;
+    private array: Array<ListItem> = [];
+
+    constructor({ items }: { items: Iterable<ListItem>; }) {
+        this.array = Array.from(items);
+    }
+
+    next(...args: [] | [undefined]): IteratorResult<ListItem, any> {
+        return {
+            done: this.array[this.index] == undefined,
+            value: this.array[this.index],
+        };
+    }
+}
 
 export class List implements ListInterface {
-    private itemset: ItemSet;
+    private itemset: Array<ListItem>;
 
-    items(): ItemSet {
+    constructor(list?: Iterable<ListItem>) {
+        if (list == undefined) {
+            list = [];
+        }
+        this.itemset = Array.from(list);
+    }
+
+    [Symbol.iterator](): Iterator<ListItem> {
+        return new ListIterator({ items: this.itemset });
+    }
+
+    items(): Array<ListItem> {
         return this.itemset;
     }
 
+    add(i: ListItem): void {
+        this.itemset
+    }
+
     remove(index: number): ListInterface {
-        if (Array.isArray(this.itemset)) {
-            this.itemset.splice(index, 1);
-        }
-        else {
-            this.itemset.remove(index);
-        }
+        this.itemset.splice(index, 1);
+
         return this;
     }
 
     length(): number {
-        if (Array.isArray(this.itemset)) {
-            return this.itemset.length;
-        }
-        return this.itemset.toArray().length;
+        return this.itemset.length;
     }
 
     moveItems(i1: number, i2: number, alg?: Function | undefined): ListInterface {
