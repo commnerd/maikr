@@ -5,7 +5,6 @@ import { ListRoutingModule } from './list-routing.module';
 
 import { TextEditListModule } from '@templates/text-edit-list/text-edit-list.module';
 
-
 @NgModule({
   declarations: [
     ListComponent

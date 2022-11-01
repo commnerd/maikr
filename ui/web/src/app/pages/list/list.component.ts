@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { List } from '@maikr/lib/interfaces/list';
 
 import { List as ListModel } from 'src/app/models/list';

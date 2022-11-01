@@ -5,8 +5,6 @@ import { TextEditListComponent } from './text-edit-list.component';
 import { TextEditModule } from '@templates/text-edit/text-edit.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-
-
 @NgModule({
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
