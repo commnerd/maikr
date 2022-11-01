@@ -18,7 +18,7 @@ export class TextEditListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.list.length() <= 0) {
+    if (this.list?.length() <= 0) {
       this.list.add({} as ListItem);
     }
   }

@@ -1,21 +1,7 @@
+import { ListIterator } from './list-iterator';
+
 import { List as ListInterface } from '../interfaces/list';
 import { ListItem } from '../interfaces/list_item';
-
-class ListIterator implements Iterator<ListItem> {
-    private index = 0;
-    private array: Array<ListItem> = [];
-
-    constructor({ items }: { items: Iterable<ListItem>; }) {
-        this.array = Array.from(items);
-    }
-
-    next(...args: [] | [undefined]): IteratorResult<ListItem, any> {
-        return {
-            done: this.array[this.index] == undefined,
-            value: this.array[this.index],
-        };
-    }
-}
 
 export class List implements ListInterface {
     private itemset: Array<ListItem>;
@@ -36,10 +22,10 @@ export class List implements ListInterface {
     }
 
     add(i: ListItem): void {
-        this.itemset
+        this.itemset;
     }
 
-    remove(index: number): ListInterface {
+    remove(index: number): List {
         this.itemset.splice(index, 1);
 
         return this;
@@ -49,7 +35,7 @@ export class List implements ListInterface {
         return this.itemset.length;
     }
 
-    moveItems(i1: number, i2: number, alg?: Function | undefined): ListInterface {
+    moveItems(i1: number, i2: number, alg?: Function | undefined): List {
         if (i1 > i2) {
             return this.moveItems(i2, i1, alg);
         }

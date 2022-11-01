@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { List } from '@maikr/lib/interfaces/list';
 
-import { List as ListModel } from 'src/app/models/list';
+import { List } from 'src/app/models/list';
 
 @Component({
   selector: 'app-list',
@@ -10,11 +9,12 @@ import { List as ListModel } from 'src/app/models/list';
 })
 export class ListComponent implements OnInit {
 
-  list: List = new ListModel();
+  list!: List;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.list = new List([]);
   }
 
 }
