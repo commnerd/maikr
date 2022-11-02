@@ -1,0 +1,8 @@
+local_resource(
+    name='ui',
+    serve_cmd='cd ../../ui/web && npm install && ng serve',
+    allow_parallel=True,
+    links = [
+        link('http://localhost:4200', 'UI')
+    ]
+)

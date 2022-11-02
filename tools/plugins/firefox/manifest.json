@@ -1,0 +1,9 @@
+{
+    "name": "maikr",
+    "version": "0.3.0",
+    "description": "Organize your life!",
+    "manifest_version": 2,
+    "permissions": [
+        "storage"
+    ]
+}
