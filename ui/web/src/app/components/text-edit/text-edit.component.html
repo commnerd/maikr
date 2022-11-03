@@ -1,0 +1,9 @@
+<span appearance="fill">
+    <mat-form-field *ngIf="editMode">
+        <mat-label>
+            <ng-content></ng-content>
+        </mat-label>
+        <input #inputRef (keyup)="keyUp($event)" (blur)="blur()" [(ngModel)]="input" matInput />
+    </mat-form-field>
+    <span *ngIf="!editMode" (dblclick)="doubleClick($event)">{{ input }}</span>
+</span>

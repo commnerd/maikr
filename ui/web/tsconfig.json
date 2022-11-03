@@ -23,8 +23,14 @@
       "dom"
     ],
     "paths": {
+      "@components/*": [
+        "src/app/components/*"
+      ],
       "@pages/*": [
         "src/app/pages/*"
+      ],
+      "@templates/*": [
+        "src/app/templates/*"
       ]
     }
   },
