@@ -1,5 +1,6 @@
-import { Component, OnInit, NgIterable } from '@angular/core';
-import { ListItem } from '@maikr/lib/interfaces/list-item';
+import { Component, OnInit } from '@angular/core';
+import { List } from '@maikr/interfaces/list';
+import { List as ListModel } from '../../models/list';
 
 @Component({
   selector: 'app-list',
@@ -8,7 +9,7 @@ import { ListItem } from '@maikr/lib/interfaces/list-item';
 })
 export class ListComponent implements OnInit {
 
-  list: NgIterable<ListItem> = [];
+  list: List = new ListModel();
 
   constructor() { }
 

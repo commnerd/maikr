@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropListComponent } from './drag-drop-list.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TextEditModule } from '@components/text-edit/text-edit.module';
 
 
 
@@ -9,7 +11,9 @@ import { DragDropListComponent } from './drag-drop-list.component';
     DragDropListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    DragDropModule,
+    TextEditModule
   ],
   exports: [
     DragDropListComponent

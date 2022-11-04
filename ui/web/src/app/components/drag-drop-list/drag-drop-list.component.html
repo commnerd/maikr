@@ -1,1 +1,8 @@
-<p>drag-drop-list works!</p>
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let item of list.items(); index as strIndex" cdkDrag>
+        <text-edit [input]="item.short()" (inputChange)="update(strIndex, $event)">
+            <ng-content></ng-content>
+        </text-edit>
+        <button *ngIf="item.short().length > 0" (push)="remove(strIndex)">X</button>
+    </div>
+</div>

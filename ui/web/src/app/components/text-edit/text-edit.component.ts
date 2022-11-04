@@ -17,25 +17,25 @@ export class TextEditComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(this.input.length <= 0) {
+    if (this.input.length <= 0) {
       this.editMode = true;
     }
   }
 
   blur() {
-    if(this.input.length > 0) {
+    if (this.input.length > 0) {
       this.editMode = false;
       this.inputChange.emit(this.input);
     }
   }
 
   keyUp(event: KeyboardEvent) {
-    if(event.key === 'Enter'){
+    if (event.key === 'Enter') {
       event.target?.dispatchEvent(new Event('blur'))
     }
   }
 
-  doubleClick(event: FocusEvent){
+  doubleClick(event: FocusEvent) {
     this.editMode = true;
     setTimeout(() => {
       this.inputRef.nativeElement.focus();
