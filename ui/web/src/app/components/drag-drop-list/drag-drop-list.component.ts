@@ -22,6 +22,7 @@ export class DragDropListComponent implements OnInit {
   }
 
   remove(index: number) {
+    console.log("HI");
     this.list.remove(index);
   }
 
@@ -34,11 +35,11 @@ export class DragDropListComponent implements OnInit {
       this.list.remove(index);
       return;
     }
+    this.list.update(index, value);
+    console.log(value);
     if (this.list.items()[this.list.length() - 1].short() !== "") {
       this.list.add();
-      return;
     }
-    this.list.update(index, value);
   }
 
 }

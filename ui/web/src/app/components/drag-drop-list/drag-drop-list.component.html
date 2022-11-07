@@ -3,6 +3,6 @@
         <text-edit [input]="item.short()" (inputChange)="update(strIndex, $event)">
             <ng-content></ng-content>
         </text-edit>
-        <button *ngIf="item.short().length > 0" (push)="remove(strIndex)">X</button>
+        <button *ngIf="item.short().length > 0" (click)="remove(strIndex)">X</button>
     </div>
 </div>
