@@ -25,8 +25,8 @@ export class TextEditComponent implements OnInit, AfterViewInit {
   blur() {
     if (this.input.length > 0) {
       this.editMode = false;
-      this.inputChange.emit(this.input);
     }
+    this.inputChange.emit(this.input);
   }
 
   keyUp(event: KeyboardEvent) {
@@ -44,7 +44,7 @@ export class TextEditComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.inputRef?.nativeElement.focus();
+      this.inputRef.nativeElement.focus();
     }, 0);
   }
 
