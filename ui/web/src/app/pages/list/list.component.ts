@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { List } from '@maikr/interfaces/list';
-import { List as ListModel } from '../../models/list';
+
+import { ListFactoryService } from 'src/app/services/list-factory.service';
 
 @Component({
   selector: 'app-list',
@@ -9,11 +10,14 @@ import { List as ListModel } from '../../models/list';
 })
 export class ListComponent implements OnInit {
 
-  list: List = new ListModel();
+  list!: List;
 
-  constructor() { }
+  constructor(
+    private listFactory: ListFactoryService
+  ) { }
 
   ngOnInit(): void {
+    this.list = this.listFactory.new();
   }
 
 }
