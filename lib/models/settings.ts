@@ -6,6 +6,6 @@ export class Settings {
     constructor(settings?: { [l: string]: string }) {
         this.settings = settings || {};
 
-        this.settings.run_context = RunContext.LOCAL;
+        this.settings['run_context'] = RunContext.LOCAL;
     }
 }
