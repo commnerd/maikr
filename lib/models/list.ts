@@ -1,6 +1,5 @@
 import { List as ListInterface } from '../interfaces/list';
 import { ListItem } from '../interfaces/list-item';
-import { ListItem as ListItemModel } from './list-item';
 import { ListItemIterator } from './list-item-iterator';
 
 export class List implements ListInterface {
@@ -22,10 +21,7 @@ export class List implements ListInterface {
         return this.listItems;
     }
 
-    add(i?: ListItem): void {
-        if (i == undefined) {
-            i = new ListItemModel();
-        }
+    add(i: ListItem): void {
         this.listItems.push(i);
     }
 

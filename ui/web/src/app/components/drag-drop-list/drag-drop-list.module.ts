@@ -4,7 +4,7 @@ import { DragDropListComponent } from './drag-drop-list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TextEditModule } from '@components/text-edit/text-edit.module';
 
-
+import { ListItemFactoryService } from 'src/app/services/list-item-factory.service';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,9 @@ import { TextEditModule } from '@components/text-edit/text-edit.module';
   ],
   exports: [
     DragDropListComponent
+  ],
+  providers: [
+    ListItemFactoryService
   ]
 })
 export class DragDropListModule { }

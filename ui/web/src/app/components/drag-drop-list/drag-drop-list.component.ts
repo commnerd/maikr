@@ -2,6 +2,7 @@ import { Component, Input, NgIterable, OnInit, Output, EventEmitter } from '@ang
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import { List } from '@maikr/interfaces/list';
+import { ListItemFactoryService } from 'src/app/services/list-item-factory.service';
 
 @Component({
   selector: 'drag-drop-list',
@@ -13,11 +14,13 @@ export class DragDropListComponent implements OnInit {
   @Input() list!: List;
   @Output() listChange: EventEmitter<List> = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private listItemFactory: ListItemFactoryService
+  ) { }
 
   ngOnInit(): void {
     if (this.list.length() <= 0) {
-      this.list.add();
+      this.list.add(this.listItemFactory.new());
     }
   }
 
@@ -35,7 +38,7 @@ export class DragDropListComponent implements OnInit {
     }
     this.list.update(index, value);
     if (this.list.items()[this.list.length() - 1].short() !== "") {
-      this.list.add();
+      this.list.add(this.listItemFactory.new());
     }
   }
 
