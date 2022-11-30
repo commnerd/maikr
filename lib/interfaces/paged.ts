@@ -1,3 +1,5 @@
+import { ListItem } from './list-item';
+
 /**
  * The interface for paginating result sets
  */

@@ -6,3 +6,9 @@ local_resource(
         link('http://localhost:4200', 'UI')
     ]
 )
+
+local_resource(
+    name='lib-enums-builder',
+    serve_cmd='cd ../../lib/enums && npm install && webpack watch',
+    allow_parallel=True
+)

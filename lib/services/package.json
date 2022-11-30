@@ -1,0 +1,36 @@
+{
+    "name": "@maikr/services",
+    "version": "0.4.0",
+    "description": "Library for implementing default interface implementations for Maikr tools integrations",
+    "scripts": {
+      "test": "test"
+    },
+    "dependencies": {
+      "tslib": "^2.3.0"
+    },
+    "devDependencies": {
+      "@types/node": "^12.11.1",
+      "typescript": "~4.6.2"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/commnerd/maikr.git"
+    },
+    "keywords": [
+      "maikr",
+      "project",
+      "models",
+      "management",
+      "organization",
+      "planning",
+      "coordination",
+      "workflow",
+      "maker"
+    ],
+    "author": "Michael J. Miller <commnerd@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/commnerd/maikr/issues"
+    },
+    "homepage": "https://github.com/commnerd/maikr#readme"
+  }
