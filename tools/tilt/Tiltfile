@@ -9,6 +9,12 @@ local_resource(
 
 local_resource(
     name='lib-enums-builder',
-    serve_cmd='cd ../../lib/enums && npm install && webpack watch',
+    serve_cmd='cd ../../lib/enums && npm install && ./node_modules/webpack/bin/webpack.js watch',
+    allow_parallel=True
+)
+
+local_resource(
+    name='lib-interfaces-builder',
+    serve_cmd='cd ../../lib/interfaces && npm install && ./node_modules/webpack/bin/webpack.js watch',
     allow_parallel=True
 )

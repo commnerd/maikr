@@ -3,7 +3,7 @@ import { ListItem } from './list-item';
 /**
  * The interface for paginating result sets
  */
-export interface Paged extends Iterable<ListItem> {
-    firstPage(): Iterable<ListItem>;
+export interface Paged<Pageable> extends Iterable<Pageable> {
+    firstPage(): Iterable<Pageable>;
     remove(index: number): void;
 }
