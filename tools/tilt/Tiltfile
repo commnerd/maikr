@@ -18,3 +18,9 @@ local_resource(
     serve_cmd='cd ../../lib/interfaces && npm install && ./node_modules/webpack/bin/webpack.js watch',
     allow_parallel=True
 )
+
+local_resource(
+    name='lib-models-builder',
+    serve_cmd='cd ../../lib/models && npm install && ./node_modules/webpack/bin/webpack.js watch --stats-error-details',
+    allow_parallel=True
+)

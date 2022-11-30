@@ -1,7 +1,7 @@
 import { Paged } from './paged';
 import { Model } from './model';
 import { Id } from './id';
-import { RunContext } from './run_context';
+import { RunContext } from '@maikr/enums';
 
 /**
  * The interface for interacting with all storage medium
