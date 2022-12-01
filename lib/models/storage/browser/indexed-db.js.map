@@ -1,0 +1,1 @@
+{"version":3,"file":"indexed-db.js","sourceRoot":"","sources":["indexed-db.ts"],"names":[],"mappings":";;;AAAA;IAGI,mBAAmB,IAAY,EAAE,OAAgB;QAC7C,IAAI,CAAC,IAAI,GAAG,MAAM,CAAC,SAAS,CAAC,IAAI,CAAC,IAAI,EAAE,OAAO,CAAC,CAAC;IACrD,CAAC;IACL,gBAAC;AAAD,CAAC,AAND,IAMC;AANY,8BAAS"}
