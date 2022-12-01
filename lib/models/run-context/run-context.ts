@@ -1,5 +1,5 @@
-import { RunContext as RunContextInterface } from "../../interfaces/run_context";
-import { RunContext as RunContextEnum } from "../../enums/run_context";
+import { RunContext as RunContextInterface } from "@maikr/interfaces/run-context";
+import { RunContext as RunContextEnum } from "@maikr/enums/run-context";
 
 export abstract class RunContext implements RunContextInterface {
 

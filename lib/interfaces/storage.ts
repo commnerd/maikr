@@ -1,12 +1,11 @@
 import { Paged } from './paged';
 import { Model } from './model';
 import { Id } from './id';
-import { RunContext } from '@maikr/enums';
 
 /**
  * The interface for interacting with all storage medium
  */
-export interface Storage extends RunContext {
+export interface Storage {
     /**
      * List models with provided optional filters
      */
@@ -15,20 +14,20 @@ export interface Storage extends RunContext {
     /**
      * Create model in storage medium
      */
-    create(Model): Promise<Model>;
+    create(model: Model): Promise<Model>;
 
     /**
      * Read model from storage medium
      */
-    read(Id): Promise<Model>;
+    read(id: Id): Promise<Model>;
 
     /**
      * Update model in storage medium
      */
-    update(Model): Promise<Model>;
+    update(model: Model): Promise<Model>;
 
     /**
      * Delete model from storage medium
      */
-    delete(Id): Promise<boolean>;
+    delete(id: Id): Promise<boolean>;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { List } from '@maikr/models/list';
+import { List } from '@maikr/models';
 
 @Injectable({
   providedIn: 'root'
