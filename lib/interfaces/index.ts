@@ -6,3 +6,4 @@ export { Paged } from './paged';
 export { RunContext } from './run-context';
 export { Sluggable } from './sluggable';
 export { Storage } from './storage';
+export { DateTracked } from './date-tracked';

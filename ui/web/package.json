@@ -23,6 +23,7 @@
     "@angular/router": "^14.2.9",
     "@maikr/interfaces": "file:../../lib/interfaces",
     "@maikr/models": "file:../../lib/models",
+    "@maikr/enums": "file:../../lib/enums",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

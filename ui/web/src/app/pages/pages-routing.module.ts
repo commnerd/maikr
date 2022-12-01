@@ -29,6 +29,11 @@ const routes: Routes = [
     loadChildren: () => import('@pages/logs/logs.module').then(m => m.LogsModule)
   },
   {
+    path: "projects",
+    component: PagesComponent,
+    loadChildren: () => import('@pages/projects/projects.module').then(m => m.ProjectsModule)
+  },
+  {
     path: "schedule",
     component: PagesComponent,
     loadChildren: () => import('@pages/schedule/schedule.module').then(m => m.ScheduleModule)
