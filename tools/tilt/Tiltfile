@@ -1,3 +1,11 @@
+libs = [
+    'enums',
+    'interfaces',
+    'models'
+]
+
+builder = 'cd ../../lib/{mod} && npm install && node ./node_modules/tsc-watch/lib/tsc-watch.js'
+
 local_resource(
     name='ui',
     serve_cmd='cd ../../ui/web && npm install && ng serve',
@@ -7,20 +15,9 @@ local_resource(
     ]
 )
 
-local_resource(
-    name='lib-enums-builder',
-    serve_cmd='cd ../../lib/enums && npm install && ./node_modules/webpack/bin/webpack.js watch',
-    allow_parallel=True
-)
-
-local_resource(
-    name='lib-interfaces-builder',
-    serve_cmd='cd ../../lib/interfaces && npm install && ./node_modules/webpack/bin/webpack.js watch',
-    allow_parallel=True
-)
-
-local_resource(
-    name='lib-models-builder',
-    serve_cmd='cd ../../lib/models && npm install && ./node_modules/webpack/bin/webpack.js watch --stats-error-details',
-    allow_parallel=True
-)
+for lib in libs:
+    local_resource(
+        name='lib-{mod}-builder'.format(mod=lib),
+        serve_cmd=builder.format(mod=lib),
+        allow_parallel=True,
+    )
