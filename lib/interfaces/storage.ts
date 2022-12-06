@@ -1,33 +1,33 @@
 import { Paged } from './paged';
-import { Model } from './model';
-import { Id } from './id';
+import { LocalId } from './local-id';
+import { StoredModel } from './stored-model';
 
 /**
  * The interface for interacting with all storage medium
  */
-export interface Storage {
+export interface Storage<T extends StoredModel> {
     /**
      * List models with provided optional filters
      */
-    list(): Promise<Paged<Model>>;
+    list(): Promise<Paged<T>>;
 
     /**
      * Create model in storage medium
      */
-    create(model: Model): Promise<Model>;
+    create(model: T): Promise<T>;
 
     /**
      * Read model from storage medium
      */
-    read(id: Id): Promise<Model>;
+    read(id: LocalId): Promise<T> | null;
 
     /**
      * Update model in storage medium
      */
-    update(model: Model): Promise<Model>;
+    update(model: T): Promise<T>;
 
     /**
      * Delete model from storage medium
      */
-    delete(id: Id): Promise<boolean>;
+    delete(id: LocalId): Promise<boolean>;
 }

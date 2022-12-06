@@ -1,0 +1,1 @@
+export type GlobalId = string | null;

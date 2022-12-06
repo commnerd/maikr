@@ -1,4 +1,8 @@
+import { StoredModel } from "./stored-model";
+
 /**
- * Basic model definition for stored models
+ * Basic model definition
  */
-export interface Model { }
+export interface Model {
+    fill(vals: {}): Model;
+}

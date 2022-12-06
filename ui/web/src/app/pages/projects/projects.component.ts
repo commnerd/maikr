@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalId, Paged } from '@maikr/interfaces';
 
 import { Project } from '@maikr/models/project';
-// import { ProjectService } from '@services/project.service';
+import { ProjectService } from '@services/project.service';
 
 @Component({
   selector: 'project-index',
@@ -10,16 +11,16 @@ import { Project } from '@maikr/models/project';
 })
 export class ProjectsComponent implements OnInit {
 
-  projects$: Promise<Array<Project>> | null = null; // this.projectService.list();
+  projects$: Promise<Paged<Project>> = this.projectService.list();
 
   constructor(
-    // private projectService: ProjectService,
+    private projectService: ProjectService,
   ) { }
 
   ngOnInit(): void {}
 
-  nextLink(project: Project): Array<string> {
-    return ["/", "mvp", project._id];
+  nextLink(project: Project): Array<LocalId> {
+    return ["/", "mvp", project.getLocalId()];
   }
 
   nextLabel(project: Project): string {

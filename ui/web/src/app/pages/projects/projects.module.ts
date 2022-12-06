@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { ProjectsComponent } from './projects.component';
 import { NewComponent } from './new/new.component';
-// import { ProjectsService } from '@services/projects.service';
+import { ProjectService } from '@services/project.service';
 import { DefinitionComponent } from './definition/definition.component';
 import { MainNavModule } from '@templates/main-nav/main-nav.module';
 import { CenteredContentModule } from '@templates/centered-content/centered-content.module';
@@ -31,10 +31,9 @@ import { CenteredContentModule } from '@templates/centered-content/centered-cont
     ReactiveFormsModule,
     ProjectsRoutingModule,
     MainNavModule,
-    CenteredContentModule
+    CenteredContentModule,
   ],
-  // providers: [ProjectsService],
-  providers: [],
+  providers: [ProjectService],
 
 })
 export class ProjectsModule { }

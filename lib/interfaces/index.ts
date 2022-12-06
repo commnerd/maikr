@@ -1,4 +1,6 @@
-export { Id } from './id';
+export { GlobalId } from './global-id';
+export { LocalId } from './local-id';
+export { StoredModel } from './stored-model';
 export { ListItem } from './list-item';
 export { List } from './list';
 export { Model } from './model';
@@ -7,3 +9,4 @@ export { RunContext } from './run-context';
 export { Sluggable } from './sluggable';
 export { Storage } from './storage';
 export { DateTracked } from './date-tracked';
+export { Project } from './project';

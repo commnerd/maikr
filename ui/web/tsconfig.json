@@ -29,6 +29,9 @@
       "@pages/*": [
         "src/app/pages/*"
       ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
       "@templates/*": [
         "src/app/templates/*"
       ]
@@ -39,5 +42,8 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "files": [
+    "node_modules/@maikr/models/index.js"
+  ]
 }
