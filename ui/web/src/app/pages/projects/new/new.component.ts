@@ -31,7 +31,7 @@ export class NewComponent implements OnInit {
     let project = new Project();
 
     project.save()
-      .then(savedProject => this.router.navigate([savedProject.getLocalId(), "definition"]));
+      .then(savedProject => this.router.navigate([savedProject.local_id, "definition"]));
   }
 
 }

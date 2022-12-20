@@ -10,6 +10,9 @@ export class Project implements ProjectInterface {
     private _globalId: GlobalId = null;
     private _localId: LocalId = null;
     private _name: string = '';
+    /** TODO: FIX REFERENCES! */
+    private _phase: Phase = 'idea' as Phase; // Phase.Idea;
+    private _type: Type = 'software' as Type; // Type.Software;
 
     constructor(storage?: Storage<ProjectInterface>) {
         if(!storage) {
@@ -28,33 +31,42 @@ export class Project implements ProjectInterface {
     public static fill(vals: {}): Project {
         let project = new Project();
         
-        
-
         return project;
     }
 
-    getLocalId(): LocalId {
-        return this._localId;
+    get local_id(): LocalId | null {
+        return this._localId || null;
     }
-
-    setLocalId(id: LocalId): void {
+    set local_id(id: LocalId) {
         this._localId = id;
     }
-
-    getGlobalId(): GlobalId {
+    
+    get global_id(): GlobalId | null {
         return this._globalId;
     }
+    set global_id(id: GlobalId) {
+        this._globalId = id;
+    }
 
-    getName(): string {
+    get name(): string {
         return this._name;
     }
-
-    getPhase(): Phase {
-        return Phase.Idea
+    set name(name: string) {
+        this._name = name;
     }
 
-    getType(): Type {
+    get phase(): Phase {
+        return this._phase;
+    }
+    set phase(phase: Phase) {
+        this._phase = phase;
+    }
+
+    get type(): Type {
         return Type.Software;
+    }
+    set type(type: Type) {
+        this._type = type;
     }
 
     save(): Promise<ProjectInterface> {
@@ -65,6 +77,6 @@ export class Project implements ProjectInterface {
     }
 
     delete(): Promise<boolean> {
-        return this._storage?.delete(this.getLocalId()) || new Promise(_ => false);
+        return this._storage?.delete(this.local_id) || new Promise(_ => false);
     }
 }

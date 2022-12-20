@@ -1,8 +1,10 @@
 import { LocalId, Model, ListItem, StoredModel, Storage, Paged } from '@maikr/interfaces';
 
+const MAKE_ID_LENGTH = 25;
+
 export class IndexedDb implements Storage<StoredModel> {
     private conn: IDBOpenDBRequest;
-    private store?: string;
+    private _store?: string;
 
     constructor(name: string, version?: number) {
         this.conn = window.indexedDB.open(name, version);
@@ -23,40 +25,40 @@ export class IndexedDb implements Storage<StoredModel> {
 
     length: number = 0;
 
-    getSlug(): string {
+    get slug(): string {
         return "indexed-db";
     }
 
-    getLabel(): string {
+    get label(): string {
         return "Indexed DB";
     }
 
-    setStore(store: string) {
-        this.store = store;
+    set store(store: string) {
+        this._store = store;
     }
 
     clear(): void {
-        this.conn.transaction?.objectStore(this.store || "").clear();
+        this.conn.transaction?.objectStore(this._store || "").clear();
     }
 
     getItem(key: LocalId): string | null {
         if(key !== null) {
-            return this.conn.transaction?.objectStore(this.store || "").get(key).result;
+            return this.conn.transaction?.objectStore(this._store || "").get(key).result;
         }
         return null;
     }
 
     removeItem(key: string): void {
-        this.conn.transaction?.objectStore(this.store || "").delete(key);
+        this.conn.transaction?.objectStore(this._store || "").delete(key);
     }
 
     setItem(key: string, value: string): void {
-        this.conn.transaction?.objectStore(this.store || "").put(value, key);
+        this.conn.transaction?.objectStore(this._store || "").put(value, key);
     }
 
     list<T extends StoredModel>(): Promise<Paged<T>> {
         return new Promise((resolve, reject) => {
-            resolve(this.conn.transaction?.objectStore(this.store || "").getAll().result as unknown as Paged<T>);
+            resolve(this.conn.transaction?.objectStore(this._store || "").getAll().result as unknown as Paged<T>);
             reject("Failed to generate model list");
         });
     }
@@ -75,11 +77,11 @@ export class IndexedDb implements Storage<StoredModel> {
             resolve(model);
             reject("Failed to update model");
         });
-        let id: LocalId = model.getLocalId();
-        if(!model.getLocalId()) {
-            model.setLocalId(id);
+        let id: LocalId = model.local_id || this.makeid(MAKE_ID_LENGTH);
+        if(!model.local_id) {
+            model.local_id = id;
         }
-        this.setItem(id?.toString() || this['makeid'](25), JSON.stringify(model));
+        this.setItem(id.toString(), JSON.stringify(model));
 
         return promise;
     }

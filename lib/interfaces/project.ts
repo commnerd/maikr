@@ -3,9 +3,7 @@ import { Phase, Type } from '@maikr/enums'
 import { StoredModel } from './stored-model';
 
 export interface Project extends StoredModel {
-    getName(): string;
-
-    getPhase(): Phase;
-
-    getType(): Type;
+    name: string;
+    phase: Phase;
+    type: Type;
 }

@@ -3,7 +3,7 @@
     <h1>Poject(s)</h1>
     <div style="margin-top:10px">
     <ul>
-        <li *ngFor="let project of projects$ | async">{{ project.getName() }} -&gt;
+        <li *ngFor="let project of projects$ | async">{{ project.name }} -&gt;
             <a [routerLink]="nextLink(project)">{{ nextLabel(project) }}</a>
         </li>
     </ul>

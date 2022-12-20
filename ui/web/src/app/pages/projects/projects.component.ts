@@ -20,7 +20,7 @@ export class ProjectsComponent implements OnInit {
   ngOnInit(): void {}
 
   nextLink(project: Project): Array<LocalId> {
-    return ["/", "mvp", project.getLocalId()];
+    return ["/", "mvp", project.local_id];
   }
 
   nextLabel(project: Project): string {

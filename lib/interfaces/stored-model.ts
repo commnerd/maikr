@@ -3,9 +3,8 @@ import { LocalId } from "./local-id";
 import { Model } from "./model";
 
 export interface StoredModel extends Model {
-    getLocalId(): LocalId;
-    setLocalId(id: LocalId): void;
-    getGlobalId(): GlobalId;
+    local_id?: LocalId;
+    global_id?: GlobalId;
     save(): Promise<StoredModel>;
     delete(): Promise<boolean>;
 }

@@ -3,14 +3,6 @@ import { RunContext as RunContextEnum } from "@maikr/enums/run-context";
 
 export abstract class RunContext implements RunContextInterface {
 
-    protected abstract label: string;
-    protected abstract slug: RunContextEnum;
-
-    getSlug(): RunContextEnum {
-        return this.slug;
-    }
-
-    getLabel(): string {
-        return this.label;
-    }
+    abstract label: string;
+    abstract slug: RunContextEnum;
 }
