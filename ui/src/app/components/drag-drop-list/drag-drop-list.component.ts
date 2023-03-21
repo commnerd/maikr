@@ -25,10 +25,9 @@ export class DragDropListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  drop(event: Event) {
-    // CdkDragDrop<string[]>
+  drop(event: CdkDragDrop<string[]>) { 
     console.log(event);
-    // moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
 }
