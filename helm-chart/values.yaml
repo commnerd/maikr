@@ -40,6 +40,12 @@ service:
   type: ClusterIP
   port: 80
 
+mongodb:
+  replicas: 1
+  admin_user: "user"
+  admin_pass: "pass"
+  url: "mongodb"
+
 ingress:
   enabled: false
   className: ""

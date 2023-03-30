@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: {{ include "helm-chart.fullname" . }}-mongodb-replicaset
+  labels:
+    app: {{ include "helm-chart.fullname" . }}
+    tier: {{ include "helm-chart.fullname" . }}-mongodb-replicaset
+spec:
+  replicas: {{ .Values.mongodb.replicas }}
+  selector:
+    matchLabels:
+      tier: {{ include "helm-chart.fullname" . }}-mongodb-replicaset
+  template:
+    metadata:
+      labels:
+        tier: {{ include "helm-chart.fullname" . }}-mongodb-replicaset
+    spec:
+      containers:
+      - name: {{ include "helm-chart.fullname" . }}-mongodb
+        image: mongodb
