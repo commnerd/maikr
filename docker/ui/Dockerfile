@@ -2,13 +2,13 @@ FROM alpine/git as project-fetcher
 
 RUN git clone https://github.com/commnerd/maikr.git -b v0.5.x /maikr
 
-FROM node as builder
+FROM node:18.14.0 as builder
 
-RUN npm install --global @angular/cli
+RUN npm install --global @angular/cli@14.2.11
 
 COPY --from=project-fetcher /maikr/ui /web/ui
 
 RUN cd /web/ui && \
     npm install && \
-    ng build --production
+    ng build --configuration production
 
