@@ -1,5 +1,5 @@
 .DEFAULT: serve
-CURRENT_DEV_CHAIN = "v0.1.x"
+CURRENT_DEV_CHAIN = "v0.5.x"
 
 .PHONY: help
 help:

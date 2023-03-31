@@ -1,18 +1,20 @@
 services:
   ui:
-    build: docker/ui
+    image: commnerd/maikr_ui
+    build: ./docker/ui
     volumes:
-      - ./ui:/srv/ui:z
-      - ./lib:/srv/lib:z
+      - ./ui:/web/ui:z
+      - ./lib:/web/lib:z
     ports:
       - ${UI_PORT:-4200}:4200
     depends_on:
       - api
   api:
-    build: docker/api
+    image: commnerd/maikr_api
+    build: ./docker/api
     volumes:
-      - ./srv:/srv/srv:z
-      - ./lib:/srv/lib:z
+      - ./srv:/web/api:z
+      - ./lib:/web/lib:z
     ports:
       - ${SRV_PORT:-3000}:3000
     environment:
