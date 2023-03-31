@@ -1,6 +1,6 @@
 trigger_mode(TRIGGER_MODE_MANUAL)
 docker_compose("./docker-compose.yaml")
-for container in ['mongodb', 'mongo-express', 'srv', 'ui']:
+for container in ['mongodb', 'mongo-express', 'api', 'ui']:
     dc_resource(
         container,
         auto_init=False if container == 'mongo-express' else True,

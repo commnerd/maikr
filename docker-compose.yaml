@@ -6,8 +6,10 @@ services:
       - ./lib:/srv/lib:z
     ports:
       - ${UI_PORT:-4200}:4200
-  srv:
-    build: docker/srv
+    depends_on:
+      - api
+  api:
+    build: docker/api
     volumes:
       - ./srv:/srv/srv:z
       - ./lib:/srv/lib:z
@@ -18,6 +20,8 @@ services:
       - MONGO_PASS=${MONGO_PASS:-pass}
       - MONGO_URL=${MONGO_URL:-mongodb}
       - MONGO_TABLE=${MONGO_TABLE:-admin}
+    depends_on:
+      - mongodb
   mongodb:
     image: mongo:5.0.8
     ports:
