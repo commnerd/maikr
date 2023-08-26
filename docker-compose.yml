@@ -1,0 +1,8 @@
+services:
+  ui:
+    build: docker/ui
+    volumes:
+      - ./ui:/srv/ui:z
+      - ./lib:/srv/lib:z
+    ports:
+      - ${UI_PORT:-4200}:4200
