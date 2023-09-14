@@ -38,7 +38,8 @@ export class DataService {
   }
 
   private runTransaction<I, O>(method: string, item: I | null): Promise<O> {
-    const transaction = this.db.transaction(["customers"], "readwrite");
+    const tableName = item?.constructor.name.toLowerCase();
+    const transaction = this.db.transaction([tableName], "readwrite").objectStore(tableName);
     this.setupTransactionTriggers(transaction);
 
     return lastValueFrom(of({} as O));
@@ -76,7 +77,7 @@ export class DataService {
   
   private setupDatabaseOpenErrorTrigger(request: IDBOpenDBRequest): void {
     request.onerror = (event) => {
-      this.db = (event?.target as any)?.result;
+      console.error("The database failed to open.", event);
     };
   }
 
@@ -84,9 +85,6 @@ export class DataService {
     request.onupgradeneeded = (event) => {
       const db = (event?.target as any)?.result;
     
-      // Create another object store called "names" with the autoIncrement flag set as true.
-      // const objStore = db.createObjectStore("tickets", { autoIncrement: true });
-
       db.createObjectStore("tickets", { autoIncrement: true });
     };
   }
