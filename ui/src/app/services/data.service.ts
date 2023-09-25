@@ -7,8 +7,10 @@ import { of, lastValueFrom } from 'rxjs';
 export class DataService {
 
   db ?: any;
+  table ?: string;
 
-  constructor() {
+  constructor(item: object) {
+    let className = item.constructor.name;
     const request = indexedDB.open("maikr");
     request.onerror = (event) => {
       console.error(event);
