@@ -1,8 +1,20 @@
 version: "3"
 services:
+  ui:
+    build: ui/docker
+    image: maikr/ui
+    volumes:
+      - ./ui:/ui
+    ports:
+      - ${PORT:-80}:4200
+
   api:
     build: api/docker
     image: maikr/api
+    volumes:
+      - ./api:/api
+    ports:
+      - ${PORT:-81}:80
 
   mongo:
     image: mongo
