@@ -6,11 +6,17 @@ ENV BRANCH v0.8.x
 
 RUN apt update && \
     apt install -y git && \
+    yarn global add webpack-cli && \
     git clone https://github.com/commnerd/maikr.git -b ${BRANCH} && \
-    cd maikr && ls
+    cd maikr/api && \
+    ./node_modules/webpack-cli/bin/cli.js
 
-COPY --from=builder /maikr/api /api
+FROM node:20.6.1 as runner
+
+EXPOSE 80
+
+COPY --from=builder /maikr/api/dist/* /api
 
 WORKDIR /api
 
-CMD [ 'yarn', 'dev' ]
+CMD [ 'node /api/bundle.js' ]

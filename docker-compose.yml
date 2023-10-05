@@ -3,7 +3,8 @@ services:
   api:
     build: api/docker
     image: maikr/api
-
+    volumes:
+      - ./api:/api
   mongo:
     image: mongo
     restart: always
