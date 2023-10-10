@@ -1,1 +1,6 @@
-<p>index works!</p>
+<h1>Ideas</h1>
+<div cdkDropList class="ideas" (cdkDropListDropped)="drop($event)">
+    <div class="line" *ngFor="let idea of ideas" cdkDrag>
+        {{ idea.line }}
+    </div>
+  </div>
