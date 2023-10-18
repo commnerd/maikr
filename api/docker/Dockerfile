@@ -17,4 +17,6 @@ COPY --from=builder /maikr/api /api
 
 WORKDIR /api
 
-CMD [ "ng", "start" ]
+RUN [ "bash", "-c", "yarn && yarn build"]
+
+CMD [ "bash", "-c", "ls" ]
