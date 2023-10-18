@@ -1,6 +1,2 @@
 <h1>Ideas</h1>
-<div cdkDropList class="ideas" (cdkDropListDropped)="drop($event)">
-    <div class="line" *ngFor="let idea of ideas" cdkDrag>
-        {{ idea.line }}
-    </div>
-  </div>
+<app-list [items]="ideas$ | async"></app-list>

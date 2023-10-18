@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IndexComponent } from './index/index.component';
 import { IdeasRoutingModule } from './ideas-routing.module';
 import { IdeaService } from 'src/app/services/idea.service';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { PartialsModule } from '@partials/partials.module';
 
 @NgModule({
   providers: [
@@ -15,7 +15,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   imports: [
     CommonModule,
     IdeasRoutingModule,
-    DragDropModule,
+    PartialsModule,
   ]
 })
 export class IdeasModule { }

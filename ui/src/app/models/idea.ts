@@ -1,15 +1,15 @@
+import { Listable } from "@interfaces/listable";
 
-
-export class Idea {
+export class Idea implements Listable {
     id ?: string;
-    line !: string;
+    idea !: string;
 
     constructor(input: Idea | string | null) {
         if(typeof input == 'string') {
-            this.line = input;
+            this.idea = input;
         }
         if(input == null) {
-            this.line = '';
+            this.idea = '';
         }
         if(typeof input == 'object') {
             let keys = Object.keys(input as object);
@@ -17,5 +17,9 @@ export class Idea {
                 (this as any)[key] = (input as any)[key];
             }
         }
+    }
+
+    line(): string {
+        return this.idea;
     }
 }

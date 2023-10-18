@@ -5,6 +5,11 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@interfaces/*": [ "src/app/interfaces/*" ],
+      "@models/*": [ "src/app/models/*" ],
+      "@partials/*": [ "src/app/partials/*" ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
