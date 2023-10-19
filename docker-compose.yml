@@ -17,6 +17,7 @@ services:
       - ./api:/maikr/api
     ports:
       - ${PORT:-81}:80
+    command: [ "bash", "-c", "yarn && yarn dev" ]
 
   mongo:
     image: mongo

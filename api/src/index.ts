@@ -8,7 +8,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.get('/ideas', (req: Request, res: Response) => {
-  res.send(JSON.stringify([{line: 'abcdef'}, {line: 'ghijkl'}]));
+  res.set('Access-Control-Allow-Origin', '*');
+  res.send(JSON.stringify([{idea: 'abcdef'}, {idea: 'ghijkl'}]));
 });
 
 app.listen(port, () => {

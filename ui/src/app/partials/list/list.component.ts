@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Listable } from '@interfaces/listable';
 
@@ -7,8 +7,13 @@ import { Listable } from '@interfaces/listable';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
+  
   @Input() items!: Array<Listable> | null;
+
+  ngOnInit(): void {
+    this.items?.push({line: () => 'boo'} as Listable);
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if(this.items) {

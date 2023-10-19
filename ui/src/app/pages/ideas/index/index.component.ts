@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IdeaService } from '../../../services/idea.service';
 import { Idea } from '@models/idea';
-import { Observable } from 'rxjs';
+import { Observable, last, map } from 'rxjs';
 
 @Component({
   selector: 'app-index',
@@ -9,7 +9,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent {
-  ideas$ : Observable<Array<Idea>> = this.ideaService.list();
+  ideas$ : Observable<Array<any>> = this.ideaService.list().pipe(
+    map(values => values.map((value => new Idea(value)))),
+  );
 
   constructor(
     private ideaService: IdeaService
