@@ -1,22 +1,16 @@
-FROM node:20.6.1 as builder
+FROM node:20.6.1
 
 LABEL com.maikr.image.authors="commnerd@gmail.com"
 
 ENV BRANCH v0.8.x
 ENV PORT 80
 
-RUN git clone https://github.com/commnerd/maikr.git -b ${BRANCH} && \
-    cd maikr/api && \
-    yarn && yarn build
-
-FROM node:20.6.1 as runner
-
 EXPOSE ${PORT}
 
-COPY --from=builder /maikr/api /api
+RUN git clone https://github.com/commnerd/maikr.git -b ${BRANCH} && \
+    cd maikr/api && \
+    yarn
 
-WORKDIR /api
-
-RUN [ "bash", "-c", "yarn"]
+WORKDIR /maikr/api
 
 CMD [ "bash", "-c", "yarn build && yarn start" ]

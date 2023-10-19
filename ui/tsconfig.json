@@ -8,7 +8,8 @@
     "paths": {
       "@interfaces/*": [ "src/app/interfaces/*" ],
       "@models/*": [ "src/app/models/*" ],
-      "@partials/*": [ "src/app/partials/*" ]
+      "@partials/*": [ "src/app/partials/*" ],
+      "@lib/*": [ "node_modules/lib/*" ]
     },
     "strict": true,
     "noImplicitOverride": true,

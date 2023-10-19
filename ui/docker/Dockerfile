@@ -13,4 +13,4 @@ RUN yarn global add @angular/cli && \
 
 WORKDIR /maikr/ui
 
-CMD [ "bash", "-c", "yes n | yarn start --host 0.0.0.0 1>/dev/null" ]
+CMD [ "bash", "-c", "yarn && yes n | yarn start --host 0.0.0.0 1>/dev/null" ]

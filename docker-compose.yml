@@ -4,7 +4,8 @@ services:
     build: ui/docker
     image: maikr/ui
     volumes:
-      - ./ui:/ui
+      - ./lib:/maikr/lib
+      - ./ui:/maikr/ui
     ports:
       - ${PORT:-80}:4200
 
@@ -12,7 +13,8 @@ services:
     build: api/docker
     image: maikr/api
     volumes:
-      - ./api:/api
+      - ./lib:/maikr/lib
+      - ./api:/maikr/api
     ports:
       - ${PORT:-81}:80
 
