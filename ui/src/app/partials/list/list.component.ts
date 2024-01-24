@@ -1,14 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Listable } from '@interfaces/listable';
 
-interface EditModable {
-  edit: boolean;
-}
-
-interface Updatable {
-  update(evt: Event): void
-}
 
 @Component({
   selector: 'app-list',
@@ -17,7 +10,10 @@ interface Updatable {
 })
 export class ListComponent implements OnInit {
 
-  @Input() items!: Array<Listable & EditModable & Updatable> | null;
+  @Input() items!: Array<Listable> | null;
+  @ViewChild('itemInput') itemInputElement !: ElementRef;
+
+  edit: number = -1;
 
   ngOnInit(): void {
     let newItem = {
@@ -25,9 +21,8 @@ export class ListComponent implements OnInit {
       line: function() {
         return this.value;
       },
-      edit: false,
-      update: function(v: Event) {
-        console.log(event);
+      updateLine: function(v: string) {
+        this.value = v;
       }
     };
     this.items?.push(newItem);
@@ -36,6 +31,21 @@ export class ListComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     if(this.items) {
       moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    }
+  }
+
+  focus(index: number): void {
+    this.edit = index;
+    setTimeout(() => {
+      this.itemInputElement.nativeElement.focus();
+    }, 0);
+  }
+
+  update(index: number, event: Event): void
+  {
+    if(this.items != null && this.items[index] != undefined && event.currentTarget != null) {
+      this.items[index].updateLine((event.currentTarget as any)['value']);
+      this.itemInputElement.nativeElement.blur();
     }
   }
 }

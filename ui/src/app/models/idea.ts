@@ -22,4 +22,8 @@ export class Idea implements Listable {
     line(): string {
         return this.idea;
     }
+
+    updateLine(val: string): void {
+      this.idea = val;
+    }
 }
