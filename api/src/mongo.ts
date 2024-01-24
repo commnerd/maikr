@@ -15,7 +15,6 @@ export class Mongo {
 
             const query = { line: 'test' };
             const idea = await ideas.findOne(query);
-            console.log(idea);
           } finally {
             // Ensures that the client will close when you finish/error
             await this._client.close();

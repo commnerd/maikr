@@ -1,5 +1,10 @@
 <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
   <div class="box" *ngFor="let item of items" cdkDrag>
-    {{ item.line() }}
+    <ng-container *ngIf="item.edit">
+      <input [value]="item.line()" (change)="item.update($event)" (blur)="item.edit = false" />
+    </ng-container>
+    <ng-container *ngIf="!item.edit" (dblclick)="item.edit = true">
+      {{ item.line() }}
+    </ng-container>
   </div>
 </div>

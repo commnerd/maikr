@@ -17,7 +17,7 @@ export class Api {
     private bootstrapRoutes(): void {
         for(let path in Routes) {
             for(let verb in Routes[path]) {
-                this.registerRoute(verb as Verb, path,);
+                this.registerRoute(verb as Verb, path);
             }
         }
     }
@@ -37,5 +37,6 @@ export class Api {
                 this._engine.get(path, Routes[path][verb]);
                 break;
         }
+
     }
 }
