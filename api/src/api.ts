@@ -1,5 +1,7 @@
-import { Express } from 'express';
+import { Express, Request, Response } from 'express';
 import { Verb, Routes, RoutedFunction } from './routes';
+import {  } from 'express';
+import {Handler} from "./middlewares";
 
 export class Api {
     constructor(
@@ -34,9 +36,15 @@ export class Api {
                 this._engine.put(path, Routes[path][verb]);
                 break;
             default:
-                this._engine.get(path, Routes[path][verb]);
+                this._engine.get(path, this.handle.bind(this));
                 break;
         }
 
+    }
+
+    private handle(req: Request, res: Response) {
+        let middleware = new Handler();
+        middleware.handle(req, res);
+        Routes[req.path][req.method.toLowerCase()](req, res);
     }
 }
