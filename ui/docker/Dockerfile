@@ -1,4 +1,4 @@
-FROM node:20.6.1
+FROM node:20.9
 
 LABEL com.maikr.image.authors="commnerd@gmail.com"
 
