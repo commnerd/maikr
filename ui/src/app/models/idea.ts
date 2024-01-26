@@ -1,14 +1,15 @@
 import { Listable } from "@interfaces/listable";
+import { ListItemFactory } from "@interfaces/list-item-factory";
 
-export class Idea implements Listable {
+export class Idea implements Listable, ListItemFactory<Idea> {
     id ?: string;
     idea !: string;
 
-    constructor(input: Idea | string | null) {
+    constructor(input?: Idea | Object | string | null) {
         if(typeof input == 'string') {
             this.idea = input;
         }
-        if(input == null) {
+        if('undefined' == typeof input || input == null) {
             this.idea = '';
         }
         if(typeof input == 'object') {
@@ -25,5 +26,13 @@ export class Idea implements Listable {
 
     updateLine(val: string): void {
       this.idea = val;
+    }
+
+    fromJson(json: Object): Idea {
+      return new Idea(json);
+    }
+
+    empty(): Idea {
+      return new Idea();
     }
 }

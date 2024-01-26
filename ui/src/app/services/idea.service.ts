@@ -10,14 +10,17 @@ import { environment } from 'src/environments/environment';
 export class IdeaService {
 
   baseUrl: string = `${environment.api}/ideas`;
-  
+
   constructor(
     private client: HttpClient
   ) { }
 
-
   list(): Observable<Array<Idea>> {
     return this.client.get<Array<Idea>>(`${this.baseUrl}`);
     // return of([new Idea('test a'), new Idea('test b')]);
+  }
+
+  saveList(ideas: Array<Idea>) {
+    return this.client.post<Array<Idea>>(`${this.baseUrl}`, ideas);
   }
 }

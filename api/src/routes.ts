@@ -18,6 +18,9 @@ export const Routes: {[path: string]: {[verb: string]: RoutedFunction}} = {
     "/ideas": {
         "get":  (req: Request, res: Response) => {
             res.send(JSON.stringify([{idea: 'abcdef'}, {idea: 'ghijkl'}]));
+        },
+        "post": (req: Request, res: Response) => {
+            res.send(JSON.stringify(req.body));
         }
     }
 }

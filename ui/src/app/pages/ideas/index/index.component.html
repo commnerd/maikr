@@ -1,2 +1,2 @@
 <h1>Ideas</h1>
-<app-list [items]="ideas$ | async"></app-list>
+<app-list [items]="ideas$ | async" (updated)="itemsUpdate($event)" [itemFactory]="ideaFactory"></app-list>

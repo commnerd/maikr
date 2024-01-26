@@ -1,10 +1,10 @@
 <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
-  <div class="box" *ngFor="let item of items; let i = index" cdkDrag>
+  <div class="box" *ngFor="let item of items; let i = index" cdkDrag (dblclick)="focus(i)">
     <ng-container *ngIf="edit == i">
       <input [value]="item.line()" (change)="update(i, $event)" (blur)="edit = -1" #itemInput />
     </ng-container>
     <ng-container *ngIf="edit != i">
-      <span (dblclick)="focus(i)">{{ item.line() }}</span>
+      {{ item.line() }}
     </ng-container>
   </div>
 </div>

@@ -4,7 +4,7 @@ import { Middleware } from "./middleware";
 
 let middlewares: Array<Middleware> = [
     new CorsMiddleware()
-]
+];
 
 export class Handler {
     handle(req: Request, res: Response): void {
