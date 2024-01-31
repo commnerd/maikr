@@ -19,33 +19,19 @@ export class Api {
 
     private bootstrapRoutes(): void {
         for(let path in Routes) {
-            for(let verb in Routes[path]) {
-                this.registerRoute(verb as Verb, path);
-            }
+            this._engine.use(path, this.handle);
         }
-    }
-
-    private registerRoute(verb: Verb,  path: string): void {
-        switch(verb) {
-            case Verb.DELETE:
-                this._engine.delete(path, Routes[path][verb]);
-                break;
-            case Verb.POST:
-                this._engine.post(path, Routes[path][verb]);
-                break;
-            case Verb.PUT:
-                this._engine.put(path, Routes[path][verb]);
-                break;
-            default:
-                this._engine.get(path, this.handle.bind(this));
-                break;
-        }
-
     }
 
     private handle(req: Request, res: Response) {
         let middleware = new Handler();
         middleware.handle(req, res);
+        console.log(req.method, req.path);
+        if(req.method.toLowerCase() === 'options') {
+            res.set('Allow', Object.keys(Routes[req.path]).map(key => key.toUpperCase()).join(','));
+            res.send('');
+            return;
+        }
         Routes[req.path][req.method.toLowerCase()](req, res);
     }
 }
