@@ -4,7 +4,7 @@ export class Mongo {
     private _client!: MongoClient;
 
     constructor() {
-        let uri = "mongodb+srv://root:example@mongo:27017/maikr?retryWrites=true&w=majority";
+        let uri = "mongodb://root:example@mongo:27017/?retryWrites=true&w=majority";
         this._client = new MongoClient(uri);
     }
 

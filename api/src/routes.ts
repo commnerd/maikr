@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Mongo } from './mongo';
 
 export enum Verb {
     DELETE = "delete",
@@ -17,6 +18,8 @@ export const Routes: {[path: string]: {[verb: string]: RoutedFunction}} = {
     },
     "/ideas": {
         "get":  (req: Request, res: Response) => {
+            const mongodb = new Mongo();
+            mongodb.run();
             res.send(JSON.stringify([{idea: 'abcdef'}, {idea: 'ghijkl'}]));
         },
         "post": (req: Request, res: Response) => {
