@@ -1,13 +1,13 @@
 import { Express, Request, Response } from 'express';
 import { Verb, Routes } from './routes';
 import { Handler } from "./middlewares";
-import bodyPaser from 'body-parser';
+import bodyParser from 'body-parser';
 
 export class Api {
     constructor(
         private _engine: Express,
     ) {
-        this._engine.use(bodyPaser.json());
+        this._engine.use(bodyParser.json());
         this.bootstrapRoutes();
     }
 

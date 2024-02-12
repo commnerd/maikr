@@ -1,23 +1,22 @@
-import { MongoClient } from "mongodb";
+import {Collection, Db, MongoClient} from "mongodb";
 
 export class Mongo {
     private _client!: MongoClient;
+    private _database!: Db;
 
     constructor() {
         let uri = "mongodb://root:example@mongo:27017/?retryWrites=true&w=majority";
         this._client = new MongoClient(uri);
+        this._database = this._client.db('maikr');
     }
 
-    async run(): Promise<void> {
-        try {
-            const database = this._client.db('maikr');
-            const ideas = database.collection('ideas');
+    getCollection(name: string): Collection<Document>
+    {
+        return this._database.collection(name);
+    }
 
-            const query = { line: 'test' };
-            const idea = await ideas.findOne(query);
-          } finally {
-            // Ensures that the client will close when you finish/error
-            await this._client.close();
-          }
+    async closeClient(): Promise<void>
+    {
+        await this._client.close();
     }
 }

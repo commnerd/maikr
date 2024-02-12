@@ -19,8 +19,9 @@ export const Routes: {[path: string]: {[verb: string]: RoutedFunction}} = {
     "/ideas": {
         "get":  (req: Request, res: Response) => {
             const mongodb = new Mongo();
-            mongodb.run();
-            res.send(JSON.stringify([{idea: 'abcdef'}, {idea: 'ghijkl'}]));
+            const collection = mongodb.getCollection('ideas');
+            const ideas = collection.find();
+            res.send(JSON.stringify(ideas));
         },
         "post": (req: Request, res: Response) => {
             res.send(JSON.stringify(req.body));
