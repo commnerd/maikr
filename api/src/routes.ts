@@ -17,10 +17,10 @@ export const Routes: {[path: string]: {[verb: string]: RoutedFunction}} = {
         }
     },
     "/ideas": {
-        "get":  (req: Request, res: Response) => {
+        "get":  async (req: Request, res: Response) => {
             const mongodb = new Mongo();
             const collection = mongodb.getCollection('ideas');
-            const ideas = collection.find();
+            const ideas = await collection.find().toArray();
             res.send(JSON.stringify(ideas));
         },
         "post": (req: Request, res: Response) => {
